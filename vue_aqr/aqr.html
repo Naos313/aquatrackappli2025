@@ -4,42 +4,13 @@
     <head> 
         <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
         <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="aqr.js" type="text/javascript" charset="utf-8"></script> 
     </head> 
     <body> 
-        <div id="app"></div>  
+        <div id="app">
+        </div>  
+<script src="aqr.js" type="text/javascript" charset="utf-8"></script> 
 
-<script type="text/javascript">  
-
-webix.ui({ 
-
-  rows:[ 
-    { 
-view:"list", 
-id:"aqr_list", 
-minWidth:200, 
-        select:true, 
-        url:"http://192.168.61.87:3000/aqr", 
-        template:"#id# #nom#	(#acces#),#volume#L #photo# #date#",
-}, 
-{  
-	view:"form", 
-	id:"film_form", 
-	gravity:0.5,         
-	minWidth:200, 
-	// elements == rows, cols can be declared instead 
-	elements:[ 
-	  { view:"text", name:"title", id:"inp_title", label:"Nom" }, 
-	  { view:"text", name:"year", id:"inp_year", label:"Release" }, 
-	  {} 
-	] 
-  }
-
-
-
-
-  ] 
-}); 
-</script> 
     </body> 
 </html> 
 
