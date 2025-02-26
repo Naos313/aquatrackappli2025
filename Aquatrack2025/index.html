@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquatrack - Connexion</title>
+    <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script type="text/javascript">
+        webix.ready(function() {
+            showLogin();
+        });
+
+        function showLogin() {
+            webix.ui({
+                container: "app",
+                rows: [
+                    { view: "template", type: "header", template: "Connexion à Aquatrack" },
+                    {
+                        view: "form",
+                        id: "login_form",
+                        width: 400,
+                        elements: [
+                            { view: "text", label: "Identifiant", name: "identifiant", required: true },
+                            { view: "text", label: "Mot de passe", name: "mot_de_passe", type: "password", required: true },
+                            {
+                                view: "button",
+                                value: "Connexion",
+                                click: function() {
+                                    var form = $$("login_form");
+                                    if (form.validate()) {
+                                        var data = form.getValues();
+                                        if (data.identifiant === "root" && data.mot_de_passe === "Aquatrack2025") {
+                                            showMainMenu();
+                                        } else {
+                                            webix.message("Identifiants incorrects");
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            });
+        }
+
+        function showMainMenu() {
+            webix.ui({
+                container: "app",
+                rows: [
+                    { view: "template", type: "header", template: "Menu Principal" },
+                    {
+                        view: "list",
+                        id: "menu_list",
+                        template: "#title#",
+                        select: true,
+                        data: [
+                            { id: "aquarium", title: "Aquarium" },
+                            { id: "capteurs", title: "Capteurs" },
+                            { id: "personne", title: "Personnes" },
+                            { id: "hote", title: "Hôtes" },
+                            { id: "parametres", title: "Paramètres Physico-chimiques" },
+                            { id: "observations", title: "Observations" }
+                        ],
+                        on: {
+                            onItemClick: function(id) {
+                                if (id === "observations") {
+                                    window.location.href = "observations.html"; // Redirige vers la page Observations
+                                } else {
+                                    webix.message("Page en cours de développement");
+                                }
+                            }
+                        }
+                    },
+                    {
+                        view: "button",
+                        value: "Déconnexion",
+                        css: "webix_danger",
+                        click: function() {
+                            webix.confirm("Voulez-vous vraiment vous déconnecter ?", function(result) {
+                                if (result) {
+                                    window.location.reload(); // Recharge la page pour revenir à la connexion
+                                }
+                            });
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
+
+</body>
+</html>
