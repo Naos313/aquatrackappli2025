@@ -75,7 +75,7 @@ webix.ui({
 					view:"button", id:"btn_modif", autowidth:true, value:"sauvegarder", click:modifier
 				},
 				{ 
-					view:"button", id:"btn_supr", autowidth:true, value:"Supprimer",
+					view:"button", id:"btn_supr", autowidth:true, value:"Supprimer", click:supprimer
 				},
 				{ 
 					view:"button", id:"btn_clear", autowidth:true, value:"Clear", click:clearForm
@@ -117,7 +117,15 @@ function modifier(){
     webix.message("existe"); 
 	};
 };
-
+function supprimer(){
+	var list = $$("aqr_prv_list");
+	var id_list = list.getSelectedId();
+	if (id_list){
+		webix.confirm("Voulez vous supprimer " , "confirm-warning").then(function(){
+			list.remove(id_list);
+		});
+	}
+};
 
 function valuesToForm(id){
   var values = $$("aqr_prv_list").getItem(id);
