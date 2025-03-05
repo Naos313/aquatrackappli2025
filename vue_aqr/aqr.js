@@ -1,39 +1,71 @@
 webix.ui({ 
 
   rows:[
-  {
-	  cols:[
-			{view:"template", 
-			template:"Aquarium privé",
-			height:25
-			},
-			{view:"template",
-			template:"Aquarium publiques",
-			}
-		]
-},
     { 
 		cols:[
-			{view:"list", 
+			{view:"datatable", 
 			id:"aqr_prv_list", 
 			minWidth:200, 
 			select:true, 
 			url:"http://192.168.61.87:3000/aqr/", 
 			save :"json-> http://192.168.61.87:3000/aqr/",
 			datatype:"json",
-			template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
+			//template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
+			columns:[
+			{
+				id: "nom", fillspace: true, 
+				header:[{text:"Mes aquarium", colspan:2}, "Nom" ]
+			},
+			{
+				id: "acces", fillspace: true,
+				header:[ {text:""}, {text:"Accés"} ] 
+			},
+			{
+				id: "volume",fillspace: true, 
+				header:[ {text:""}, {text:"Volumes"} ]
+			},
+			{
+				id: "photo", fillspace: true, 
+				header:[ {text:""}, {text:"Photo"} ]
+			},
+			{
+				id: "date", fillspace: true,
+				header:[ {text:""}, {text:"Date"} ] 
+			}
+			],
 			on:{
 				onAfterSelect:valuesToForm
 			}
 			},
-			{view:"list", 
+			{view:"datatable", 
 			id:"aqr_plq_list", 
 			minWidth:200, 
 			select:true, 
+			autoConfig:true,
 			url:"http://192.168.61.87:3000/aqr_pub", 
 			datatype:"json",
-			template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
-			
+			columns:[
+			{
+				id: "nom", fillspace: true, 
+				header:[{text:"Aquarium publiques", colspan:4}, "Nom" ]
+			},
+			{
+				id: "acces", fillspace: true,
+				header:[ {text:""}, {text:"Accés"} ] 
+			},
+			{
+				id: "volume",fillspace: true, 
+				header:[ {text:""}, {text:"Volumes"} ]
+			},
+			{
+				id: "photo", fillspace: true, 
+				header:[ {text:""}, {text:"Photo"} ]
+			},
+			{
+				id: "date", fillspace: true,
+				header:[ {text:""}, {text:"Date"} ] 
+			}
+			],
 			}
 		]
 }, 
@@ -46,22 +78,20 @@ webix.ui({
 				// elements == rows, cols can be declared instead 
 				elements:[ 
 				  { view:"text", name:"nom", id:"inp_nom", label:"Nom de l'aquarium :" }, 
-				  { view:"text", name:"acces", id:"inp_acces", label:"Niveau d'accès :" },
-				  /*{view:"combo", 
+				  {view:"combo", 
 					  name:"acces", 
 					  id:"inp_acces", 
 					  label:"Niveau d'accès :",
-					  value:"1", 
+					  value:"privé", 
 					  options:[
-						{id:1, value:"privé"},
-						{id:2, value:"publique"}
+						{id:"privé", value:"privé"},
+						{id:"publique", value:"publique"}
 					] 
-					},*/
+					},
 				  { view:"datepicker", name:"date", id:"inp_date", label:"Date de création :" },
 				  { view:"text", name:"volume", id:"inp_volume", label:"Volume :" },
 				  { view:"text", name:"photo", id:"inp_photo", label:"Photo :" }, 
 				  { view:"text", name:"utl", id:"inp_id_utl", label:"Identifient de l'utilisateur :" },
-				  { view:"text", name:"id", id:"inp_id_aqr", label:"Identifient de l'aquarium :" },
 				  {} 
 				] 
 			},
@@ -71,16 +101,18 @@ webix.ui({
 			  // elements == cols, rows can be declared instead
 			  elements:[
 				// autowidth is a specific feature of button and label
-				{ 
-					view:"button", id:"btn_modif", autowidth:true, value:"sauvegarder", click:modifier
-				},
-				{ 
-					view:"button", id:"btn_supr", autowidth:true, value:"Supprimer", click:supprimer
-				},
-				{ 
-					view:"button", id:"btn_clear", autowidth:true, value:"Clear", click:clearForm
-					
-				},
+				{ margin:5, rows:[
+					{ 
+						view:"button", id:"btn_modif", autowidth:true, value:"sauvegarder", click:modifier
+					},
+					{ 
+						view:"button", id:"btn_supr", value:"Supprimer", click:supprimer
+					},
+					{ 
+						view:"button", id:"btn_clear", value:"Clear", click:clearForm
+						
+					},
+				]}
 				  
 			  ]
 				
@@ -105,17 +137,21 @@ function modifier(){
 	var sel = data.getSelectedId(); 
 	var form = $$("aqr_form");
 	var form_data = form.getValues();
-	if (!form_data.nom) return;
+	if (!form_data.nom || !form_data.acces || !form_data.date || !form_data.volume){
+		webix.message("Le formulaire n'est pas rempli");
+		return;
+	}
     if (!sel){
-		webix.message("existe pas");
+		webix.message(item.nom + " a été ajouté");
 		data.add(form_data);
     } else{
 	var item = data.getItem(sel);
     
     item = form_data;             // setting the new value for the item 
     data.updateItem(sel, item);     // the dataset is updated! 
-    webix.message("existe"); 
+    webix.message(item.nom + " a été modifié"); 
 	};
+	clearForm();
 };
 function supprimer(){
 	var list = $$("aqr_prv_list");
@@ -125,6 +161,7 @@ function supprimer(){
 			list.remove(id_list);
 		});
 	}
+	clearForm();
 };
 
 function valuesToForm(id){
