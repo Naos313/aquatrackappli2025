@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8">
+        <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <script type="text/javascript" charset="utf-8">
+            webix.ui({
+                rows: [
+                    { view: "label", label: "Paramètres de l'Aquarium", align: "center" },
+                    { 
+                        view: "datatable", 
+                        id: "aquariumTable",
+                        url: "http://192.168.61.87:3000/aqr", 
+                        save: "json->http://192.168.61.87:3000/aqr",
+                        datatype: "json", 
+                        editable: true,
+                        editaction: "dblclick",
+                        autoConfig: true, 
+                        columns: [
+                            { id: "id", header: "id", fillspace: true, editor: "text" },
+                            { id: "acces", header: "acces", fillspace: true, editor: "text" },
+                            { id: "date", header: "date", fillspace: true, editor: "text" },
+                            { id: "volume", header: "volume", fillspace: true, editor: "text" },
+                            { id: "nom", header: "nom", fillspace: true, editor: "text" }
+                        ]
+                    },
+                    { 
+                        cols: [
+                            { 
+                                view: "button", 
+                                value: "+ Ajouter Paramètre", 
+                                click: function() {
+                                    $$('aquariumTable').add({ parametre: "Nouvel élément", valeur: "" }, 0);
+                                }
+                            },
+                            { 
+                                view: "button", 
+                                value: "- Supprimer Dernier", 
+                                click: function() {
+                                    let table = $$('aquariumTable');
+                                    let firstId = table.getFirstId();
+                                    if (firstId) table.remove(firstId);
+                                }
+                            }
+                        ]
+                    }
+                ]
+            });
+        </script>
+    </body>
+</html>
