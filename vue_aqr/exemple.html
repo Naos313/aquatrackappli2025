@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+
+<html> 
+    <head> 
+        <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
+        <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="aqr.js" type="text/javascript" charset="utf-8"></script> 
+    </head> 
+    <body> 
+        <div id="app">
+        </div>  
+		<script>
+			webix.ui({ 
+				rows:[
+					{view:"datatable", 
+					id:"aqr_prv_list", 
+					minWidth:200, 
+					select:true,
+					url:"http://192.168.61.87:3000/aqr/", 
+					save :"json-> http://192.168.61.87:3000/aqr/",
+					datatype:"json",
+					//template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
+					columns:[
+					{
+						id: "nom", fillspace: true,
+						header:[{text:"Mes aquarium", colspan:2}, "Nom" ]
+					},
+					{
+						id: "acces", fillspace: true,
+						header:[ {text:""}, {text:"Acces"} ] 
+					},
+					{
+						id: "volume",fillspace: true, 
+						header:[ {text:""}, {text:"Volumes"} ]
+					},
+					{
+						id: "photo", fillspace: true, 
+						header:[ {text:""}, {text:"Photo"} ]
+					},
+					{
+						id: "date", fillspace: true,
+						header:[ {text:""}, {text:"Date"} ] 
+					},
+					{ 
+						width:150,
+						
+						template: function (obj) {
+							return '<img src="'+obj.photo+'"  width=50% height=50%/>'
+						  } 				// usage of predefined elements
+					}
+					],
+					on:{
+						onAfterSelect:valuesToForm
+					}
+					},
+					{ 
+						data: { title: "Aquarium", src: "http://webix.ir.lan/vue_aqr/aquarium.png" },
+						template: function (obj) {
+							// obj is a data record object
+							return '<img src="'+obj.src+'"/>'
+						  } 
+					}
+				  ]
+		});
+		</script> 
+		
+    </body> 
+</html> 
+
+ 
+
+ 

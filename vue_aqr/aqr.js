@@ -25,8 +25,13 @@ webix.ui({
 				header:[ {text:""}, {text:"Volumes"} ]
 			},
 			{
-				id: "photo", fillspace: true, 
-				header:[ {text:""}, {text:"Photo"} ]
+				id: "photo", 
+					fillspace: true, 
+					header:[ {text:""}, {text:"Photo"} ],
+					width:150,
+					template: function (obj) {
+						return '<img src="'+obj.photo+'" height=100%/>'
+					  }
 			},
 			{
 				id: "date", fillspace: true,
@@ -58,8 +63,13 @@ webix.ui({
 				header:[ {text:""}, {text:"Volumes"} ]
 			},
 			{
-				id: "photo", fillspace: true, 
-				header:[ {text:""}, {text:"Photo"} ]
+				id: "photo", 
+				fillspace: true, 
+				header:[ {text:""}, {text:"Photo"} ],
+				width:150,
+				template: function (obj) {
+					return '<img src="'+obj.photo+'" height=100%/>'
+				  }
 			},
 			{
 				id: "date", fillspace: true,
@@ -88,7 +98,7 @@ webix.ui({
 						{id:"publique", value:"publique"}
 					] 
 					},
-				  { view:"datepicker", name:"date", id:"inp_date", label:"Date de création :" },
+				  { view:"datepicker",format:"%d.%m.%Y", name:"date", id:"inp_date", label:"Date de création :" },
 				  { view:"text", name:"volume", id:"inp_volume", label:"Volume :" },
 				  { view:"text", name:"photo", id:"inp_photo", label:"Photo :" }, 
 				  { view:"text", name:"utl", id:"inp_id_utl", label:"Identifient de l'utilisateur :" },
@@ -103,13 +113,13 @@ webix.ui({
 				// autowidth is a specific feature of button and label
 				{ margin:5, rows:[
 					{ 
-						view:"button", id:"btn_modif", autowidth:true, value:"sauvegarder", click:modifier
+						view:"button", id:"btn_modif", autowidth:true, height:80, value:"sauvegarder", click:modifier
 					},
 					{ 
-						view:"button", id:"btn_supr", value:"Supprimer", click:supprimer
+						view:"button", id:"btn_supr", height:80, value:"Supprimer", click:supprimer
 					},
 					{ 
-						view:"button", id:"btn_clear", value:"Clear", click:clearForm
+						view:"button", id:"btn_clear", height:80, value:"Effacer", click:clearForm
 						
 					},
 				]}
