@@ -1,20 +1,28 @@
+var format_date = webix.Date.dateToStr("%d/%m/%Y");
+
 webix.ui({ 
 
   rows:[
+	{cols:[
+		{},
+		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouveau"}
+	]},
     { 
 		cols:[
 			{view:"datatable", 
 			id:"aqr_prv_list", 
 			minWidth:200, 
+			autoheight: true,
 			select:true, 
 			url:"http://192.168.61.87:3000/aqr/", 
-			save :"json-> http://192.168.61.87:3000/aqr/",
+			//save :"json-> http://192.168.61.87:3000/aqr/",
 			datatype:"json",
 			//template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
 			columns:[
 			{
 				id: "nom", fillspace: true, 
-				header:[{text:"Mes aquarium", colspan:2}, "Nom" ]
+				header:[{text:"Mes aquarium", colspan:5}, "Nom" ],
+				css:"titleColumn",
 			},
 			{
 				id: "acces", fillspace: true,
@@ -22,7 +30,10 @@ webix.ui({
 			},
 			{
 				id: "volume",fillspace: true, 
-				header:[ {text:""}, {text:"Volumes"} ]
+				header:[ {text:""}, {text:"Volumes"} ],
+				template: function (obj) {
+					return "<span>" + obj.volume + " L</span>"
+				}
 			},
 			{
 				id: "photo", 
@@ -35,16 +46,18 @@ webix.ui({
 			},
 			{
 				id: "date", fillspace: true,
-				header:[ {text:""}, {text:"Date"} ] 
+				header:[ {text:""}, {text:"Date"} ],
+				format:format_date
 			}
 			],
-			on:{
+			/*on:{
 				onAfterSelect:valuesToForm
-			}
+			}*/
 			},
 			{view:"datatable", 
 			id:"aqr_plq_list", 
-			minWidth:200, 
+			minWidth:200,
+			autoheight: true, 
 			select:true, 
 			autoConfig:true,
 			url:"http://192.168.61.87:3000/aqr_pub", 
@@ -52,7 +65,7 @@ webix.ui({
 			columns:[
 			{
 				id: "nom", fillspace: true, 
-				header:[{text:"Aquarium publiques", colspan:4}, "Nom" ]
+				header:[{text:"Aquarium publiques", colspan:5}, "Nom" ]
 			},
 			{
 				id: "acces", fillspace: true,
@@ -60,7 +73,10 @@ webix.ui({
 			},
 			{
 				id: "volume",fillspace: true, 
-				header:[ {text:""}, {text:"Volumes"} ]
+				header:[ {text:""}, {text:"Volumes"} ],
+				template: function (obj) {
+					return "<span>" + obj.volume + " L</span>"
+				}
 			},
 			{
 				id: "photo", 
@@ -73,13 +89,14 @@ webix.ui({
 			},
 			{
 				id: "date", fillspace: true,
-				header:[ {text:""}, {text:"Date"} ] 
+				header:[ {text:""}, {text:"Date"} ],
+				format:format_date  
 			}
 			],
 			}
 		]
 }, 
-{  
+/*{  
 	cols:[
 			{
 				view:"form", 
@@ -98,7 +115,7 @@ webix.ui({
 						{id:"publique", value:"publique"}
 					] 
 					},
-				  { view:"datepicker",format:"%d.%m.%Y", name:"date", id:"inp_date", label:"Date de création :" },
+				  { view:"datepicker",format:"%d/%m/%Y", name:"date", id:"inp_date", label:"Date de création :" },
 				  { view:"text", name:"volume", id:"inp_volume", label:"Volume :" },
 				  { view:"text", name:"photo", id:"inp_photo", label:"Photo :" }, 
 				  { view:"text", name:"utl", id:"inp_id_utl", label:"Identifient de l'utilisateur :" },
@@ -128,7 +145,7 @@ webix.ui({
 				
 			}
 		]
-  }
+  }*/
 
 
 
@@ -138,7 +155,7 @@ webix.ui({
 
 
 
-function clearForm(){
+/*function clearForm(){
   $$("aqr_form").clear();
   $$("aqr_prv_list").unselectAll();
 };
@@ -178,5 +195,5 @@ function valuesToForm(id){
   var values = $$("aqr_prv_list").getItem(id);
   $$("aqr_form").setValues(values)
 
-};
+};*/
 
