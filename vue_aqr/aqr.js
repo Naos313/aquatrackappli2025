@@ -1,4 +1,5 @@
 var format_date = webix.Date.dateToStr("%d/%m/%Y");
+var n_private =7;
 
 webix.ui({ 
 
@@ -12,9 +13,16 @@ webix.ui({
 			{view:"datatable", 
 			id:"aqr_prv_list", 
 			minWidth:200, 
-			autoheight: true,
+
 			select:true, 
-			url:"http://192.168.61.87:3000/aqr/", 
+			url:function(params){
+				return webix.ajax().get("http://192.168.61.87:3000/aqr/", params).then(function(data){
+					data = data.json();
+					for ( let ligne of data){
+						ligne.$height = 60;
+					}
+					return data;});
+			}, 
 			//save :"json-> http://192.168.61.87:3000/aqr/",
 			datatype:"json",
 			//template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
@@ -57,10 +65,17 @@ webix.ui({
 			{view:"datatable", 
 			id:"aqr_plq_list", 
 			minWidth:200,
-			autoheight: true, 
+
 			select:true, 
 			autoConfig:true,
-			url:"http://192.168.61.87:3000/aqr_pub", 
+			url:function(params){
+				return webix.ajax().get("http://192.168.61.87:3000/aqr_pub/", params).then(function(data){
+					data = data.json();
+					for ( let ligne of data){
+						ligne.$height = 60;
+					}
+					return data;});
+			}, 
 			datatype:"json",
 			columns:[
 			{
@@ -152,7 +167,6 @@ webix.ui({
 
   ] 
 }); 
-
 
 
 /*function clearForm(){

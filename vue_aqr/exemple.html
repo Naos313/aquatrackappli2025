@@ -10,58 +10,71 @@
         <div id="app">
         </div>  
 		<script>
+			var test = webix.ui({
+					view:"window",
+					head:"You can close the window",
+					width: 1000,
+
+					close:true,     
+					body:{ cols:[
+			{
+				view:"form", 
+				id:"aqr_form", 
+				gravity:1,
+				// elements == rows, cols can be declared instead 
+				elements:[ 
+				  { view:"text", name:"nom", id:"inp_nom", label:"Nom de l'aquarium :" }, 
+				  {view:"combo", 
+					  name:"acces", 
+					  id:"inp_acces", 
+					  label:"Niveau d'accès :",
+					  value:"privé", 
+					  options:[
+						{id:"privé", value:"privé"},
+						{id:"publique", value:"publique"}
+					] 
+					},
+				  { view:"datepicker",format:"%d/%m/%Y", name:"date", id:"inp_date", label:"Date de création :" },
+				  { view:"text", name:"volume", id:"inp_volume", label:"Volume :" },
+				  { view:"text", name:"photo", id:"inp_photo", label:"Photo :" }, 
+				  { view:"text", name:"utl", id:"inp_id_utl", label:"Identifient de l'utilisateur :" },
+				  {} 
+				] 
+			},
+			{view:"toolbar",
+			  id:"bouton",
+			  
+			  // elements == cols, rows can be declared instead
+			  elements:[
+				// autowidth is a specific feature of button and label
+				{ margin:5, rows:[
+					{ 
+						view:"button", id:"btn_modif", autowidth:true, height:80, value:"sauvegarder", 
+					},
+					{ 
+						view:"button", id:"btn_supr", height:80, value:"Supprimer", 
+					},
+					{ 
+						view:"button", id:"btn_clear", height:80, value:"Effacer",
+						
+					},
+				]}
+				  
+			  ]
+				
+			}
+		]}
+				});
 			webix.ui({ 
 				rows:[
-					{view:"datatable", 
-					id:"aqr_prv_list", 
-					minWidth:200, 
-					select:true,
-					url:"http://192.168.61.87:3000/aqr/", 
-					save :"json-> http://192.168.61.87:3000/aqr/",
-					datatype:"json",
-					//template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
-					columns:[
 					{
-						id: "nom", fillspace: true,
-						header:[{text:"Mes aquarium", colspan:2}, "Nom" ]
+						view:"button", id:"btn_nouv", value:"Nouveau",click:affiche
 					},
-					{
-						id: "acces", fillspace: true,
-						header:[ {text:""}, {text:"Acces"} ] 
-					},
-					{
-						id: "volume",fillspace: true, 
-						header:[ {text:""}, {text:"Volumes"} ]
-					},
-					{
-						id: "photo", fillspace: true, 
-						header:[ {text:""}, {text:"Photo"} ]
-					},
-					{
-						id: "date", fillspace: true,
-						header:[ {text:""}, {text:"Date"} ] 
-					},
-					{ 
-						width:150,
-						
-						template: function (obj) {
-							return '<img src="'+obj.photo+'"  width=50% height=50%/>'
-						  } 				// usage of predefined elements
-					}
-					],
-					on:{
-						onAfterSelect:valuesToForm
-					}
-					},
-					{ 
-						data: { title: "Aquarium", src: "http://webix.ir.lan/vue_aqr/aquarium.png" },
-						template: function (obj) {
-							// obj is a data record object
-							return '<img src="'+obj.src+'"/>'
-						  } 
-					}
-				  ]
-		});
+					]
+				});
+			function affiche(){
+				test.show();
+			};
 		</script> 
 		
     </body> 
