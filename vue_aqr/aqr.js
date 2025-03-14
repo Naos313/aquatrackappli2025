@@ -6,7 +6,7 @@ webix.ui({
   rows:[
 	{cols:[
 		{},
-		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouveau"}
+		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouveau",click:affiche_add_window}
 	]},
     { 
 		cols:[
@@ -23,7 +23,7 @@ webix.ui({
 					}
 					return data;});
 			}, 
-			//save :"json-> http://192.168.61.87:3000/aqr/",
+			save :"json-> http://192.168.61.87:3000/aqr/",
 			datatype:"json",
 			//template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
 			columns:[
@@ -168,33 +168,30 @@ webix.ui({
   ] 
 }); 
 
+function affiche_add_window(){
+				window_ajouter.show();
+			};
 
 /*function clearForm(){
   $$("aqr_form").clear();
   $$("aqr_prv_list").unselectAll();
-};
+};*/
 function modifier(){
 	var data= $$("aqr_prv_list");
-	var sel = data.getSelectedId(); 
+	
 	var form = $$("aqr_form");
 	var form_data = form.getValues();
 	if (!form_data.nom || !form_data.acces || !form_data.date || !form_data.volume){
 		webix.message("Le formulaire n'est pas rempli");
 		return;
 	}
-    if (!sel){
-		webix.message(item.nom + " a été ajouté");
-		data.add(form_data);
-    } else{
-	var item = data.getItem(sel);
-    
-    item = form_data;             // setting the new value for the item 
-    data.updateItem(sel, item);     // the dataset is updated! 
-    webix.message(item.nom + " a été modifié"); 
-	};
-	clearForm();
+	//webix.message(item.nom + " a été ajouté");
+	data.add(form_data);
+	webix.message("L'aquarium " + form_data.nom + " a été ajouté"); 
+	window_ajouter.hide();
+	form.clear();
 };
-function supprimer(){
+/*function supprimer(){
 	var list = $$("aqr_prv_list");
 	var id_list = list.getSelectedId();
 	if (id_list){
@@ -209,5 +206,30 @@ function valuesToForm(id){
   var values = $$("aqr_prv_list").getItem(id);
   $$("aqr_form").setValues(values)
 
+};*/
+
+	//ajouter/modifier
+/*function modifier(){
+	var data= $$("aqr_prv_list");
+	var sel = data.getSelectedId(); 
+	var form = $$("aqr_form");
+	var form_data = form.getValues();
+	if (!form_data.nom || !form_data.acces || !form_data.date || !form_data.volume){
+		webix.message("Le formulaire n'est pas rempli");
+		window_ajouter.hide();
+		return;
+	}
+    if (!sel){
+		webix.message(item.nom + " a été ajouté");
+		data.add(form_data);
+    } else{
+	var item = data.getItem(sel);
+    
+    item = form_data;             // setting the new value for the item 
+    data.updateItem(sel, item);     // the dataset is updated! 
+    webix.message(item.nom + " a été modifié"); 
+	};
+	window_ajouter.hide();
+	form.clear();
 };*/
 
