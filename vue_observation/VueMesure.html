@@ -6,6 +6,7 @@
 </head>
 <body>
     <script type="text/javascript" charset="utf-8">
+		const AdresseApi = "http://192.168.61.87:3000"
         webix.ready(function(){
             webix.ui({
                 cols:[
@@ -15,21 +16,21 @@
                         body: {
                             rows:[
 								{ view:"label", label:"temperature :" },
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#temperature#", xAxis:{ template:"#date#" }, yAxis:{} },
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#temperature#", xAxis:{ template:"#date#" }, yAxis:{} },
                                 { view:"label", label:"Acidité :"},
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#acidite#", xAxis:{ template:"#date#" }, yAxis:{} },
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#acidite#", xAxis:{ template:"#date#" }, yAxis:{} },
                                 { view:"label", label:"Conductivité :"},
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#conductivite#", xAxis:{ template:"#date#" }, yAxis:{} },
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#conductivite#", xAxis:{ template:"#date#" }, yAxis:{} },
                                 { view:"label", label:"Dureté Totale :"},
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#durtotal#", xAxis:{ template:"#date#" }, yAxis:{} },
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#durtotal#", xAxis:{ template:"#date#" }, yAxis:{} },
                                 { view:"label", label:"Dureté Carbonatée :"},
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#durcarbon#", xAxis:{ template:"#date#" }, yAxis:{} },
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#durcarbon#", xAxis:{ template:"#date#" }, yAxis:{} },
                                 { view:"label", label:"Nitrites :"},
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#nitrites#", xAxis:{ template:"#date#" }, yAxis:{} },
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#nitrites#", xAxis:{ template:"#date#" }, yAxis:{} },
                                 { view:"label", label:"Nitrates :"},
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#nitrate#", xAxis:{ template:"#date#" }, yAxis:{} },
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#nitrate#", xAxis:{ template:"#date#" }, yAxis:{} },
                                 { view:"label", label:"Fer :"},
-                                { height: 300, view:"chart", type:"line", url: "http://192.168.61.87:3000/ppc", value:"#fer#", xAxis:{ template:"#date#" }, yAxis:{} }
+                                { height: 300, view:"chart", type:"line", url: AdresseApi+"/ppc", value:"#fer#", xAxis:{ template:"#date#" }, yAxis:{} }
                             ]
                         }
                     },
@@ -54,7 +55,7 @@
             });
 
             // Récupérer les données depuis l'URL et mettre à jour les label
-            webix.ajax().get("http://192.168.61.87:3000/ppc", function(text, data){
+            webix.ajax().get(AdresseApi+"/ppc", function(text, data){
                 let response = data.json(); // Conversion en JSON
                 if(response.length > 0){
                     let lastValue = response[response.length - 1].date;
