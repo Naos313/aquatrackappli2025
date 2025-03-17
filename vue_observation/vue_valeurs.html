@@ -12,18 +12,22 @@
                     { 
                         view: "datatable", 
                         id: "aquariumTable",
-                        url: "http://192.168.61.87:3000/aqr", 
-                        save: "json->http://192.168.61.87:3000/aqr",
+                        url: "http://192.168.61.87:3000/ppc", 
+                        save: "json->http://192.168.61.87:3000/ppc",
                         datatype: "json", 
                         editable: true,
                         editaction: "dblclick",
                         autoConfig: true, 
                         columns: [
-                            { id: "id", header: "id", fillspace: true, editor: "text" },
-                            { id: "acces", header: "acces", fillspace: true, editor: "text" },
                             { id: "date", header: "date", fillspace: true, editor: "text" },
-                            { id: "volume", header: "volume", fillspace: true, editor: "text" },
-                            { id: "nom", header: "nom", fillspace: true, editor: "text" }
+                            { id: "temperature", header: "temperature", fillspace: true, editor: "text" },
+                            { id: "acidite", header: "acidite", fillspace: true, editor: "text" },
+                            { id: "conductivite", header: "conductivite", fillspace: true, editor: "text" },
+                            { id: "durtotal", header: "durtotal", fillspace: true, editor: "text" },
+                            { id: "durcarbon", header: "durcarbon", fillspace: true, editor: "text" },
+                            { id: "nitrites", header: "nitrites", fillspace: true, editor: "text" },
+                            { id: "nitrate", header: "nitrate", fillspace: true, editor: "text" },
+                            { id: "fer", header: "fer", fillspace: true, editor: "text" },
                         ]
                     },
                     { 
@@ -45,9 +49,83 @@
                                 }
                             }
                         ]
-                    }
+                    },
+                    {  
+	cols:[
+			{
+				view:"form", 
+				id:"val_form", 
+				gravity:1,
+				// elements == rows, cols can be declared instead 
+				elements:[ 
+				  { view:"datepicker",format: "%d.%m.%Y", name:"date", id:"date", label:"Date de création :" },
+				  { view:"text", name:"temperature", id:"temperature", label:"temperature" },
+				  { view:"text", name:"acidite", id:"acidite", label:"acidite" }, 
+				  { view:"text", name:"conductivite", id:"conductivite", label:"conductivite" },
+				  { view:"text", name:"durtotal", id:"durtotal", label:"durtotal" },
+				  {} 
+				] 
+			},
+			{view:"toolbar",
+			  id:"bouton",
+			  
+			  // elements == cols, rows can be declared instead
+			  elements:[
+				// autowidth is a specific feature of button and label
+				{ 
+					view:"button", id:"btn_modif", autowidth:true, value:"sauvegarder", click:modifier
+				},
+				{ 
+					view:"button", id:"btn_supr", autowidth:true, value:"Supprimer", click:supprimer
+				},
+				{ 
+					view:"button", id:"btn_clear", autowidth:true, value:"Clear", click:clearForm
+					
+				},
+				  
+			  ]
+				
+			}
+		]
+  }
                 ]
             });
+function clearForm(){
+  $$("val_form").clear();
+  $$("aquariumTable").unselectAll();
+};
+function modifier(){
+	var data= $$("aquariumTable");
+	var sel = data.getSelectedId(); 
+	var form = $$("val_form");
+	var form_data = form.getValues();
+	if (!form_data.nom) return;
+    if (!sel){
+		webix.message("existe pas");
+		data.add(form_data);
+    } else{
+	var item = data.getItem(sel);
+    
+    item = form_data;             // setting the new value for the item 
+    data.updateItem(sel, item);     // the dataset is updated! 
+    webix.message("existe"); 
+	};
+};
+function supprimer(){
+	var list = $$("aquariumTable");
+	var id_list = list.getSelectedId();
+	if (id_list){
+		webix.confirm("Voulez vous supprimer " , "confirm-warning").then(function(){
+			list.remove(id_list);
+		});
+	}
+};
+
+function valuesToForm(id){
+  var values = $$("aquariumTable").getItem(id);
+  $$("val_form").setValues(values)
+
+};
         </script>
     </body>
 </html>
