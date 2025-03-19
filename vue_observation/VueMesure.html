@@ -48,14 +48,16 @@
                             { view:"label", id:"durcarLabel", label:"Dureté Carbonatée :"},
                             { view:"label", id:"nitriteLabel", label:"Nitrites :"},
                             { view:"label", id:"nitrateLabel", label:"Nitrates :"},
-                            { view:"label", id:"ferLabel", label:"Fer :"}
+                            { view:"label", id:"ferLabel", label:"Fer :"},
+                            {view:"button" ,autowidth:true , value: "modifier mesures"}
                         ]
                     }
+                    
                 ]
             });
 
             // Récupérer les données depuis l'URL et mettre à jour les label
-            webix.ajax().get(AdresseApi+"/ppc", function(text, data){
+            webix.ajax().get("http://192.168.61.87:3000/ppc", function(text, data){
                 let response = data.json(); // Conversion en JSON
                 if(response.length > 0){
                     let lastValue = response[response.length - 1].date;
