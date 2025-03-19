@@ -62,9 +62,9 @@ webix.ui({
 			}
 			],
 			//Quand on selectionne une ligne
-			/*on:{ 
-				onAfterSelect:valuesToForm
-			}*/
+			on:{ 
+				onAfterSelect:ouvre_vue_aqr,
+			}
 			},
 			// liste aquariums publics
 			{view:"datatable", 
@@ -183,6 +183,12 @@ function affiche_add_window(){
 };*/
 
 //rajoute un aquarium
+function ouvre_vue_aqr(){
+	var list = $$("aqr_prv_list");
+	var data = list.getSelectedId();
+	webix.storage.cookie.put("id_aqr",data.id)
+	open("http://webix.ir.lan/vue_aqr/vue_aqr.html", id_aqr = "1");
+};
 function modifier(){
 	var data= $$("aqr_prv_list"); //selectionne la liste  mes aquariums dans data
 	
