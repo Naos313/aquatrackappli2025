@@ -214,7 +214,7 @@ function modifier(){
 	//webix.message(item.nom + " a été ajouté");
 	//data.add(form_data); //rajoute un aquarium avec les données du formulaire
 	webix.message("L'aquarium " + form_data.nom + " a été ajouté");  // affiche un message de comfirmation
-	//~ $$("aqr_prv_list").load(API_URL);  // rechache la liste
+	$$("aqr_prv_list").load(API_URL);  // rechache la liste
 	window_ajouter.hide(); //masque la window
 };
 /*function supprimer(){

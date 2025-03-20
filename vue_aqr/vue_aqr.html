@@ -3,28 +3,19 @@
 <html> 
     <head> 
         <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
+        <link rel="stylesheet" href="vue_aqr.css" type="text/css" charset="utf-8"> 
         <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
         <script src="vue_aqr.js" type="text/javascript" charset="utf-8"></script> 
         <title>Vue aquarium</title>
     </head> 
     <body> 
-        <div id="app">
+        <div id="info_aqr" class="aqr_info">
+		</div>
+		<div id="liste_hote" class="hote">
         </div>  
-        <script src="add_aqr.js" type="text/javascript" charset="utf-8"></script> <!--window modifier -->
+        <!--<script src="add_aqr.js" type="text/javascript" charset="utf-8"></script> <!--window modifier -->
 		<script src="vue_aqr.js" type="text/javascript" charset="utf-8"></script> <!--vue aquarium -->
-		<style>
-		  .webix_hcell{
-			text-align: center; <!-- affiche les titre des liste au centre  -->
-		  }
-		  .webix_cell{
-			text-align: center; <!-- affiche les contenues des liste au centre  -->
-			font-size: 15px;
-		  }
-		  .webix_dtable .webix_ss_body .webix_column > div { <!-- met des bordures aux listes -->
-			border-right-color: #EDEFF0;
-			border-left-color: #EDEFF0;
-		}
-		</style>
+		<script src="vue_liste_hte.js" type="text/javascript" charset="utf-8"></script> <!--vue liste des hôtes -->
     </body> 
 </html> 
 
