@@ -56,30 +56,24 @@
                 ]
             });
 
-            // Récupérer les données depuis l'URL et mettre à jour les label
-            webix.ajax().get("http://192.168.61.87:3000/ppc", function(text, data){
-                let response = data.json(); // Conversion en JSON
-                if(response.length > 0){
-                    let lastValue = response[response.length - 1].date;
-                    $$("dateLabel").setValue("Date : " + lastValue);
-                    let lastValue2 = response[response.length - 1].temperature;
-                    $$("tempLabel").setValue("Température : " + lastValue2);
-                    let lastValue3 = response[response.length - 1].acidite;
-                    $$("pHLabel").setValue("Acidité : " + lastValue3);
-                    let lastValue4 = response[response.length - 1].conductivite;
-                    $$("conductLabel").setValue("Conductivité : " + lastValue4);
-                    let lastValue5 = response[response.length - 1].durtotal;
-                    $$("durtotLabel").setValue("Dureté Totale : " + lastValue5);
-                    let lastValue6 = response[response.length - 1].durcarbon;
-                    $$("durcarLabel").setValue("Dureté Carbonatée : " + lastValue6);
-                    let lastValue7 = response[response.length - 1].nitrites;
-                    $$("nitriteLabel").setValue("Nitrites : " + lastValue7);
-                    let lastValue8 = response[response.length - 1].nitrate;
-                    $$("nitrateLabel").setValue("Nitrates : " + lastValue8);
-                    let lastValue9 = response[response.length - 1].fer;
-                    $$("ferLabel").setValue("Fer : " + lastValue9);
-                }
-            });
+webix.ajax().get("http://192.168.61.87:3000/ppc", function(text, data){
+    let response = data.json();
+    console.log("Réponse API :", response);
+
+    if(response.length > 0){
+        let lastMeasurement = response[response.length - 1];
+
+        for (let key in lastMeasurement) {
+            let labelId = key + "Label";
+            console.log(`Mise à jour : ${labelId} -> ${lastMeasurement[key]}`);
+
+            if ($$(labelId)) { 
+                $$(labelId).setValue(key.charAt(0).toUpperCase() + key.slice(1) + " : " + lastMeasurement[key]);
+            }
+        }
+    }
+});
+
 
         });
     </script>
