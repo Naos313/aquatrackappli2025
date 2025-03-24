@@ -18,7 +18,7 @@ webix.ui({
 			select:true, 
 			//charge les données
 			url:function(params){
-				return webix.ajax().get("http://192.168.61.87:3000/aqr/", params).then(function(data){
+				return webix.ajax().get(API_URL, params).then(function(data){
 					data = data.json();
 					//met la taille des ligne à 60
 					for ( let ligne of data){
@@ -27,7 +27,7 @@ webix.ui({
 					return data;});
 			}, 
 			//enregitre les modification (à modifier)
-			save :"json-> http://192.168.61.87:3000/aqr/",
+			//save :"json-> http://192.168.61.87:3000/aqr/",
 			datatype:"json",
 			//template:"#id#) #nom#	(#acces#), #volume#L #photo# #date#",
 			columns:[
@@ -198,7 +198,7 @@ function modifier(){
 		webix.message("Le formulaire n'est pas rempli");// affiche un message d'erreur si les champs ne son pas remplient
 		return;
 	}
-	let newObservation = { 
+	let newAquarium = { 
 		nom: form_data.nom, // Récupération du nom 
 		date: webix.Date.dateToStr("%Y-%m-%d")(form_data.date), // Formatage de la date 
 		acces: form_data.acces,// Récupération de l'accés 
@@ -207,7 +207,7 @@ function modifier(){
 		user_id: "1" // met l'user_id à 1 (à modifier)
 	}; 
 		// Envoi des données via AJAX en méthode POST avec conversion en JSON 
-	webix.ajax().post(API_URL, JSON.stringify(newObservation), { 
+	webix.ajax().post(API_URL, JSON.stringify(newAquarium), { 
 		headers: { "Content-Type": "application/json" } // Envoi en JSON 
 	});
 	

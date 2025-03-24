@@ -11,6 +11,7 @@ webix.ui({
 	{
 		// liste les hôtes
 		view:"datatable",
+		id:"hotes_list",
 		select:true,
 		columns:[
 			{
@@ -59,7 +60,9 @@ webix.ui({
 
 //ouvre une nouvelle windows (add_aqr.js)
 function affiche_add_window(){
-				webix.message("pas de window");
+				window_ajouter_hote.show();
+				var form = $$("hote_form"); //selectionne le formulaire de la windows dans form
+				form.clear(); //vide le formulaire
 			};
 
 /*function clearForm(){
@@ -71,7 +74,11 @@ function affiche_add_window(){
 function ouvre_vue_hote(){
 	webix.message("pas de page hôte");
 };
-
+function add_hote(){
+	var data= $$("hotes_list"); //selectionne la liste  mes aquariums dans data
+	webix.message("cc");
+	
+};
 
 
 
