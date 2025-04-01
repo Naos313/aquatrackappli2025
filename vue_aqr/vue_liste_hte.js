@@ -32,12 +32,14 @@ webix.ui({
 			{
 				id:"date_introduction",
 				fillspace:true,
-				header:[ "", "Introduction"],	
+				header:[ "", "Introduction"],
+				format:format_date  //affiche au format jj/mm/aaaa	
 			},
 			{
 				id:"date_retrait",
 				fillspace:true,
-				header:[ "", "Retrait"],	
+				header:[ "", "Retrait"],
+				format:format_date  //affiche au format jj/mm/aaaa	
 			},
 			{
 				id:"nombre",

@@ -24,6 +24,11 @@ html, body {
 	font-size: 150%;
 	font-weight: 900;
 }
-.webix_template{
-	border-width: 0px 0px 0px 0px;
+.gauche{
+	text-align: end;
+	height:100%;
 }
+.webix_view{
+	border-color: white;
+}
+
