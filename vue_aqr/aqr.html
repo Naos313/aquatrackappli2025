@@ -3,28 +3,18 @@
 <html> 
     <head> 
         <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
+        <link rel="stylesheet" href="liste_aqr.css" type="text/css" charset="utf-8"> 
         <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
         <script src="aqr.js" type="text/javascript" charset="utf-8"></script> 
         <title>Vue liste d'aquarium</title>
     </head> 
-    <body> 
-        <div id="app">
+    <body onfocus="unselect_list()">
+		<div id="Bandeau" class="Bandeau" >
+		</div>
+        <div id="liste_aqr" class="aqr_liste">
         </div>  
         <script src="add_aqr.js" type="text/javascript" charset="utf-8"></script> <!--window ajouter -->
 		<script src="aqr.js" type="text/javascript" charset="utf-8"></script> <!--vue liste d'aquarium -->
-		<style>
-		  .webix_hcell{
-			text-align: center; /* affiche les titre des liste au centre */
-		  }
-		  .webix_cell{
-			text-align: center; /*affiche les contenues des liste au centre */
-			font-size: 15px;
-		  }
-		  .webix_dtable .webix_ss_body .webix_column > div { /*met des bordures aux listes */
-			border-right-color: #EDEFF0;
-			border-left-color: #EDEFF0;
-		}
-		</style>
     </body> 
 </html> 
 

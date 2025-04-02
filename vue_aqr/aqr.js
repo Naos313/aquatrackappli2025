@@ -1,12 +1,12 @@
 var format_date = webix.Date.dateToStr("%d/%m/%Y");// formmat de la date
 var API_URL = "http://192.168.61.87:3000/aqr"; //url api
 webix.ui({ 
-
+	container:"liste_aqr",
   rows:[
   //bouton Nouveau
 	{cols:[
 		{},
-		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouveau",click:affiche_add_window} //ouvre une nouvelle windows (add_aqr.js)
+		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouvel aquarium",click:affiche_add_window} //ouvre une nouvelle windows (add_aqr.js)
 	]},
     { 
 		cols:[
@@ -63,7 +63,7 @@ webix.ui({
 			],
 			//Quand on selectionne une ligne
 			on:{ 
-				onAfterSelect:ouvre_vue_aqr,
+				onAfterSelect:ouvre_vue_mon_aqr,
 			}
 			},
 			// liste aquariums publics
@@ -110,6 +110,10 @@ webix.ui({
 				format:format_date  //affiche au format jj/mm/aaaa
 			}
 			],
+			//Quand on selectionne une ligne
+			on:{ 
+				onAfterSelect:ouvre_vue_aqr_public,
+			}
 			}
 		]
 }, 
@@ -125,10 +129,18 @@ function affiche_add_window(){
 			};
 
 //rajoute un aquarium
-function ouvre_vue_aqr(){
+function ouvre_vue_mon_aqr(){
 	var list = $$("aqr_prv_list");
 	var data = list.getSelectedId();
-	webix.storage.cookie.put("id_aqr",data.id)
+	webix.storage.cookie.put("id_aqr",data.id);
+	webix.storage.cookie.put("acces_type","Utl");
+	open("http://webix.ir.lan/vue_aqr/vue_aqr.html", id_aqr = "1");
+};
+function ouvre_vue_aqr_public(){
+	var list = $$("aqr_plq_list");
+	var data = list.getSelectedId();
+	webix.storage.cookie.put("id_aqr",data.id);
+	webix.storage.cookie.put("acces_type","Plq");
 	open("http://webix.ir.lan/vue_aqr/vue_aqr.html", id_aqr = "1");
 };
 function modifier(){
@@ -159,6 +171,10 @@ function modifier(){
 	$$("aqr_prv_list").load(API_URL);  // rechache la liste
 	window_ajouter.hide(); //masque la window
 };
+function unselect_list(){
+	$$("aqr_prv_list").unselectAll();
+	$$("aqr_plq_list").unselectAll();
+}
 /*function supprimer(){
 	var list = $$("aqr_prv_list");
 	var id_list = list.getSelectedId();

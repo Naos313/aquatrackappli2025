@@ -1,7 +1,18 @@
 var format_date = webix.Date.dateToStr("%d/%m/%Y");// formmat de la date
 var id_aqr = webix.storage.cookie.get("id_aqr");
+var acces_type = webix.storage.cookie.get("acces_type");
 var API_URL = "http://192.168.61.87:3000/aqr/" + id_aqr; //url api
-		
+var acces_ou_utl = "" ;
+
+if (acces_type == "Plq")
+{
+	acces_ou_utl = "<div class='gauche'>Utilisateur : #user_id#</div>"
+}
+else
+{
+	acces_ou_utl = "<div class='gauche'>Statut : #acces#</div>"
+}
+
 webix.ui({ 
 	container:"info_aqr",
 	rows:[
@@ -9,7 +20,7 @@ webix.ui({
 		{ 
 			view:"template", 
 			url:API_URL,
-			template:"Créé le " +format_date("obj.date") 
+			template:"Créé le #date#"
 		},
 		{ 
 			view:"template",
@@ -19,7 +30,7 @@ webix.ui({
 		{ 
 			view:"template", 
 			url:API_URL,
-			template:"<div class='gauche'>Statut : #acces#</div>" 
+			template: acces_ou_utl 
 		}
 	]},
 	{cols:[
@@ -37,10 +48,6 @@ webix.ui({
 			} 
 		}
 	]},
-	{
-		view:"datatable",
-		autoConfig:true,
-		url: API_URL
-	},
 	]
 });
+
