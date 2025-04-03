@@ -1,13 +1,14 @@
 var format_date = webix.Date.dateToStr("%d/%m/%Y");// formmat de la date
 var api_url_hte = "http://192.168.61.87:3000/hte"; //url api
 var acces_type = webix.storage.cookie.get("acces_type");
+
 webix.ui({ 
 	container:"liste_hote",
   rows:[
   //bouton Nouveau
 	{cols:[
-		{},
-		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouveau hôte",click:affiche_add_window} //ouvre une nouvelle windows (add_hote.js)
+		{height:1,},
+		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouveau hôte",hidden:true,click:affiche_add_window} //ouvre une nouvelle windows (add_hote.js)
 	]},
 	{
 		// liste les hôtes
@@ -77,7 +78,19 @@ function affiche_add_window(){
 function ouvre_vue_hote(){
 	webix.message("pas de page hôte");
 };
-
+function charge(){
+	if (acces_type == "Plq")
+	{
+		$$("btn_nouv").hide();
+	}
+	else
+	{
+		$$("btn_nouv").show();
+	}
+}
+function maj_hte(){
+	$("hotes_list").load(api_url_hte);
+};
 
 
 

@@ -73,7 +73,7 @@ function add_new_hote(){
 	//webix.message(item.nom + " a été ajouté");
 	//data.add(form_data); //rajoute un aquarium avec les données du formulaire
 	webix.message("L'hôte " + form_data.denomination + " a été ajouté");  // affiche un message de comfirmation
-	$$("hotes_list").load(API_URL);  // rechache la liste
+	$$("hotes_list").load(api_url_hte);  // rechache la liste
 	window_ajouter_hote.hide(); //masque la window
 };
 

@@ -75,7 +75,7 @@ webix.ui({
 			autoConfig:true,
 			//charge les données
 			url:function(params){
-				return webix.ajax().get("http://192.168.61.87:3000/aqr_pub/", params).then(function(data){
+				return webix.ajax().get(API_URL + "_pub", params).then(function(data){
 					data = data.json();
 					for ( let ligne of data){
 						ligne.$height = 60; //met la taille des ligne à 60
@@ -108,7 +108,7 @@ webix.ui({
 				id: "date", fillspace: true,
 				header:[ {text:""}, {text:"Date de création"} ], //espace pour le nom de la table + nom de la colonne Date de création
 				format:format_date  //affiche au format jj/mm/aaaa
-			}
+			},
 			],
 			//Quand on selectionne une ligne
 			on:{ 
@@ -136,10 +136,11 @@ function ouvre_vue_mon_aqr(){
 	webix.storage.cookie.put("acces_type","Utl");
 	open("http://webix.ir.lan/vue_aqr/vue_aqr.html", id_aqr = "1");
 };
-function ouvre_vue_aqr_public(){
+function ouvre_vue_aqr_public(id){
 	var list = $$("aqr_plq_list");
-	var data = list.getSelectedId();
+	var data = list.getItem(id);
 	webix.storage.cookie.put("id_aqr",data.id);
+	webix.storage.cookie.put("user_id",data.user_id);
 	webix.storage.cookie.put("acces_type","Plq");
 	open("http://webix.ir.lan/vue_aqr/vue_aqr.html", id_aqr = "1");
 };

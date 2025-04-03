@@ -6,21 +6,14 @@
         <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>  
     </head> 
     <body> 
-        <div id="app">
-        </div>  
-        <script src="add_aqr.js" type="text/javascript" charset="utf-8"></script>
+        <input type="submit" value="Prendre une photo" onclick="takePhoto()">
 		<script>
+			var imageCapture;
+			imageCapture = new ImageCapture();
 			
-			webix.ui({ 
-				rows:[
-					{
-						view:"button", id:"btn_nouv", value:"Nouveau",click:affiche
-					},
-					]
-				});
-			function affiche(){
-				window_ajouter.show();
-			};
+			function takePhoto() {
+				imageCapture.takePhoto();
+			}
 		</script> 
 		
     </body> 
