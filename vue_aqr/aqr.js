@@ -1,5 +1,7 @@
 var format_date = webix.Date.dateToStr("%d/%m/%Y");// formmat de la date
-var API_URL = "http://192.168.61.87:3000/aqr"; //url api
+var API_URL = "http://192.168.61.31/aqr"; //url api
+//var API_URL = "http://192.168.61.87:3000/aqr"; //url api test
+var page = "liste_aqr";
 webix.ui({ 
 	container:"liste_aqr",
   rows:[
@@ -75,7 +77,7 @@ webix.ui({
 			autoConfig:true,
 			//charge les données
 			url:function(params){
-				return webix.ajax().get(API_URL + "_pub", params).then(function(data){
+				return webix.ajax().get(API_URL + "/pub", params).then(function(data){
 					data = data.json();
 					for ( let ligne of data){
 						ligne.$height = 60; //met la taille des ligne à 60
@@ -134,7 +136,7 @@ function ouvre_vue_mon_aqr(){
 	var data = list.getSelectedId();
 	webix.storage.cookie.put("id_aqr",data.id);
 	webix.storage.cookie.put("acces_type","Utl");
-	open("http://webix.ir.lan/vue_aqr/vue_aqr.html", id_aqr = "1");
+	open("vue_aqr.html", id_aqr = "1");
 };
 function ouvre_vue_aqr_public(id){
 	var list = $$("aqr_plq_list");
@@ -142,7 +144,7 @@ function ouvre_vue_aqr_public(id){
 	webix.storage.cookie.put("id_aqr",data.id);
 	webix.storage.cookie.put("user_id",data.user_id);
 	webix.storage.cookie.put("acces_type","Plq");
-	open("http://webix.ir.lan/vue_aqr/vue_aqr.html", id_aqr = "1");
+	open("vue_aqr.html", id_aqr = "1");
 };
 function modifier(){
 	var data= $$("aqr_prv_list"); //selectionne la liste  mes aquariums dans data
@@ -158,7 +160,7 @@ function modifier(){
 		date: webix.Date.dateToStr("%Y-%m-%d")(form_data.date), // Formatage de la date 
 		acces: form_data.acces,// Récupération de l'accés 
 		volume: form_data.volume,// Récupération du volume
-		photo: form_data.photo,// Récupération de la photo
+		//photo: form_data.photo,// Récupération de la photo
 		user_id: "1" // met l'user_id à 1 (à modifier)
 	}; 
 		// Envoi des données via AJAX en méthode POST avec conversion en JSON 

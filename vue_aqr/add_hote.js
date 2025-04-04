@@ -1,5 +1,7 @@
 // met la vue window dans window_ajouter_hote
-var api_url_hte = "http://192.168.61.87:3000/hte"; //url api
+var id_aqr = webix.storage.cookie.get("id_aqr");
+var api_url_hte = "http://192.168.61.31/aqr/" + id_aqr + "/hte"; //url api
+var api_url_hte = "http://192.168.61.87:3000/hte"; //url api test
 var window_ajouter_hote = webix.ui({
 	view:"window",
 	head:"Nouvel hôte",// nom affiché de la windows
@@ -57,13 +59,14 @@ function add_new_hote(){
 		return;
 	}
 	let newHote = { 
-		genre: form_data.genre, // Récupération du nom 
-		date_introduction: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_introduction),
-		date_retrait: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_retrait), // Formatage de la date 
-		denomination: form_data.denomination,// Récupération de l'accés 
-		media: form_data.media,// Récupération du volume
-		nombre: form_data.nombre,// Récupération de la photo
-		surnom: form_data.surnom,// Récupération de la photo
+		genre: form_data.genre, // Récupération du genre
+		date_introduction: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_introduction),// Formatage de la date d'introduction
+		date_retrait: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_retrait), // Formatage de la date de retrait
+		denomination: form_data.denomination,// Récupération de la dénomination
+		media_id: form_data.media,// Récupération du Média
+		nombre: form_data.nombre,// Récupération du nombre
+		surnom: form_data.surnom,// Récupération du surnom
+		commentaire: "" // Récupération du commentaire
 	}; 
 		// Envoi des données via AJAX en méthode POST avec conversion en JSON 
 	webix.ajax().post(api_url_hte, JSON.stringify(newHote), { 

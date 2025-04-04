@@ -15,14 +15,12 @@ html, body {
 }
 .bandeau{
 	min-height: 10%;
-	background-color:#afdce2;
 }
 .aqr_info{
 	min-height: 20%;
 }
 .ppc_info{
 	min-height: 20%;
-	background-color:#ccf1d0;
 }
 .hote{
 	min-height: 50%;
