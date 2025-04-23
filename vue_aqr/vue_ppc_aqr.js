@@ -4,30 +4,34 @@ var api_url_ppc = "http://192.168.61.31/aqr/" + id_aqr + "/ppc/last?type_id=";
 
 webix.ui({
 	container:"info_ppc",
-	cols:[
-		{
-		
-		},
-		{
-			view:"datatable",
-			autoConfig:true,
-			url:"http://192.168.61.31/typ"
-		}
-	]
+
+	view:"list",
+	id:"ppc_list",
+	template:"cc #valeur#",
+	url:donnees_ppc()
+	
 });
-function test(typ_id){
-	return {
-		view:"list", 
-		id:"donnees_ppc_" + typ_id, 
-		url:api_url_ppc + typ_id, 
-		template:"#type_nom#: #valeur# #type_unite#" 
-	};
+
+function donnees_ppc(){
+	webix.ajax().get(api_url_typ).then(function(data){
+		data = data.json();
+		let test;
+		
+		for ( let ligne of data){
+			test = webix.ajax().get(api_url_ppc + ligne.id);
+			$$("ppc_list").add(test);
+		}
+		return data;
+	});
 }
-/*function data_loader(nombre){
-	var contenue = {cols:[;
-	for (let i = 0; i < nombre; i++) {
-		contenue = contenue + test(1) +,;
-	}
-	contenue = contenue + ]};
-	return contenue;
-}*/
+/*
+url:function(params){
+	return webix.ajax().get(API_URL, params).then(function(data){
+		data = data.json();
+		//met la taille des ligne à 60
+		for ( let ligne of data){
+			ligne.$height = 60;
+		}
+		return data;});
+}, 
+*/
