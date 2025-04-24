@@ -6,17 +6,42 @@
         <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>  
     </head> 
     <body> 
-        <input type="submit" value="Prendre une photo" onclick="takePhoto()">
-        <p id="test">cc</p>
+        <input type="submit" value="Prendre une photo" onclick="takePhoto()" class="bouton">
+        <p id="test" class="zone">cc</p>
 		<script>
-			var imageCapture;
-			imageCapture = new ImageCapture();
+			let imageCapture;
+			
+			function onGetUserMediaButtonClick() {
+				navigator.mediaDevices
+				.getUserMedia({ video: true })
+				.then((mediaStream) => {
+					document.querySelector("video").srcObject = mediaStream;
+
+					const track = mediaStream.getVideoTracks()[0];
+					imageCapture = new ImageCapture(track);
+				})
+			    .catch((error) => console.error(error));
+			}
+
 			function takePhoto() {
+				onGetUserMediaButtonClick()
+				
 				imageCapture.takePhoto();
 				document.getElementById("test").innerHTML= "bonjour";
 			}
 		</script> 
-		
+		<style>
+			.bouton{
+				height: 200px;
+				width: 600px;
+				font-size: 50px;
+			}
+			.zone{
+				height: 600px;
+				width: 600px;
+				background-color: #aaaaff;
+			}
+		</style>
     </body> 
 </html> 
 

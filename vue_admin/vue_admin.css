@@ -1,0 +1,10 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.bandeau{
+	min-height: 10%;
+}
+.utl_liste{
+	min-height: 90%;
+}

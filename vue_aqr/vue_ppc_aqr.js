@@ -7,21 +7,26 @@ webix.ui({
 
 	view:"list",
 	id:"ppc_list",
-	template:"cc #valeur#",
-	url:donnees_ppc()
+	template:"#type_nom#: #valeur# #type_unite# du #date#",
+	
 	
 });
 
 function donnees_ppc(){
-	webix.ajax().get(api_url_typ).then(function(data){
-		data = data.json();
+	webix.ajax().get(api_url_typ).then(function(data_typ_json){
+		data_typ = data_typ_json.json();
 		let test;
 		
-		for ( let ligne of data){
-			test = webix.ajax().get(api_url_ppc + ligne.id);
-			$$("ppc_list").add(test);
+		for ( let ligne_typ of data_typ){
+			test = webix.ajax().get(api_url_ppc + ligne_typ.id).then(function(data_ppc_json){
+			//test = webix.ajax().get(api_url_ppc + "1").then(function(data_ppc_json){
+				data_ppc = data_ppc_json.json();
+				
+				//data_ppc.id = ligne_typ.id;
+				$$("ppc_list").add(data_ppc);
+			});
 		}
-		return data;
+		
 	});
 }
 /*

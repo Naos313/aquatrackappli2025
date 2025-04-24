@@ -4,7 +4,7 @@ var largeur = 400;
 
 var acces_type = webix.storage.cookie.get("acces_type");
 
-if(page == "liste_aqr"){
+if(page == "liste"){
 	btn_retour = true;
 	autre_bouton = true;
 }
@@ -61,7 +61,7 @@ webix.ui({
 			id:"btn_param_utl", 
 			width:55,
 			height:55,
-			type: "image", image:"param_icon.png"
+			type: "image", image:"/img/param_icon.png"
 		},
 		{
 			width:5,

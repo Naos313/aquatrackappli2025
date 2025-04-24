@@ -1,7 +1,7 @@
 var format_date = webix.Date.dateToStr("%d/%m/%Y");// formmat de la date
 var API_URL = "http://192.168.61.31/aqr"; //url api
 //var API_URL = "http://192.168.61.87:3000/aqr"; //url api test
-var page = "liste_aqr";
+var page = "liste";
 webix.ui({ 
 	container:"liste_aqr",
   rows:[
@@ -49,12 +49,12 @@ webix.ui({
 				}
 			},
 			{
-				id: "photo", 
+				id: "media_id", 
 					fillspace: true, 
 					header:[ {text:""}, {text:"Photo"} ],//espace pour le nom de la table + nom de la colonne Photo
 					width:150,
 					template: function (obj) {
-						return '<img src="'+obj.photo+'" height=100%/>' // affiche l'image avec comme hauteur celle de la colonne
+						return '<img src="'+obj.media_id+'" height=100%/>' // affiche l'image avec comme hauteur celle de la colonne
 					  }
 			},
 			{
