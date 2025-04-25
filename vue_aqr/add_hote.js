@@ -1,7 +1,7 @@
 // met la vue window dans window_ajouter_hote
 var id_aqr = webix.storage.cookie.get("id_aqr");
 var api_url_hte = "http://192.168.61.31/aqr/" + id_aqr + "/hte"; //url api
-var api_url_hte = "http://192.168.61.87:3000/hte"; //url api test
+//var api_url_hte = "http://192.168.61.87:3000/hte"; //url api test
 var window_ajouter_hote = webix.ui({
 	view:"window",
 	head:"Nouvel hôte",// nom affiché de la windows

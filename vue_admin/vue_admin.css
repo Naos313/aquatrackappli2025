@@ -8,3 +8,14 @@ html, body {
 .utl_liste{
 	min-height: 90%;
 }
+.webix_hcell{
+	text-align: center; /* affiche les titre des liste au centre  */
+}
+.webix_cell{
+	text-align: center; /* affiche les contenues des liste au centre */
+	font-size: 15px;
+}
+.webix_dtable .webix_ss_body .webix_column > div { /*met des bordures aux listes */
+	border-right-color: #EDEFF0;
+	border-left-color: #EDEFF0;
+}
