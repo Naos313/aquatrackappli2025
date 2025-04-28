@@ -1,6 +1,6 @@
 var format_date = webix.Date.dateToStr("%d/%m/%Y");// formmat de la date
 var id_aqr = webix.storage.cookie.get("id_aqr");
-var api_url_hte = "http://192.168.61.31/aqr/" + id_aqr + "/hte"; //url api
+var api_url_hte = api_url + "aqr/" + id_aqr + "/hte"; //url api
 //var api_url_hte = "http://192.168.61.87:3000/hte"; //url api test
 var acces_type = webix.storage.cookie.get("acces_type");
 

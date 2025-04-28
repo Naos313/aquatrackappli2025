@@ -1,6 +1,6 @@
 var id_aqr = webix.storage.cookie.get("id_aqr");
-var api_url_typ = "http://192.168.61.31/typ";
-var api_url_ppc = "http://192.168.61.31/aqr/" + id_aqr + "/ppc/last?type_id=";
+var api_url_typ = api_url + "typ";
+var api_url_ppc = api_url + "aqr/" + id_aqr + "/ppc/last?type_id=";
 
 webix.ui({
 	container:"info_ppc",

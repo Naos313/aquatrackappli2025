@@ -6,10 +6,13 @@
         <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>  
     </head> 
     <body> 
-        <input type="submit" value="Prendre une photo" onclick="takePhoto()" class="bouton">
-        <p id="test" class="zone">cc</p>
+
 		<script>
-			let imageCapture;
+			
+			//lien = document.getElementById("photo_lien");
+
+			
+			/*let imageCapture;
 			
 			function onGetUserMediaButtonClick() {
 				navigator.mediaDevices
@@ -28,7 +31,22 @@
 				
 				imageCapture.takePhoto();
 				document.getElementById("test").innerHTML= "bonjour";
-			}
+			}*/
+			webix.ui({
+				rows:[
+					{view:"uploader", name:"uploader", 
+						formData:function(){
+							return {
+								nom:"test aqr",
+								volume:"100",
+								acces:"Privé",
+								date:"2025-03-10 14:37:42"
+							};
+						},
+					},
+					{ template:"View 2" }
+				]
+			});
 		</script> 
 		<style>
 			.bouton{
