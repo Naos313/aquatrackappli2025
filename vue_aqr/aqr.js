@@ -16,18 +16,10 @@ webix.ui({
 			{view:"datatable", 
 			id:"aqr_prv_list", 
 			minWidth:200, 
-
+			rowHeight:60,
 			select:true, 
 			//charge les données
-			url:function(params){
-				return webix.ajax().get(API_URL, params).then(function(data){
-					data = data.json();
-					//met la taille des ligne à 60
-					for ( let ligne of data){
-						ligne.$height = 60;
-					}
-					return data;});
-			}, 
+			url:API_URL, 
 			//enregitre les modification (à modifier)
 			//save :"json-> http://192.168.61.87:3000/aqr/",
 			datatype:"json",
@@ -75,18 +67,11 @@ webix.ui({
 			{view:"datatable", 
 			id:"aqr_plq_list", 
 			minWidth:200,
-
+			rowHeight:60,
 			select:true, 
 			autoConfig:true,
 			//charge les données
-			url:function(params){
-				return webix.ajax().get(API_URL + "/pub", params).then(function(data){
-					data = data.json();
-					for ( let ligne of data){
-						ligne.$height = 60; //met la taille des ligne à 60
-					}
-					return data;});
-			}, 
+			url:API_URL + "/pub", 
 			datatype:"json",
 			columns:[
 			{
@@ -150,6 +135,7 @@ function ouvre_vue_aqr_public(id){
 	webix.storage.cookie.put("id_aqr",data.id);
 	webix.storage.cookie.put("user_id",data.user_id);
 	webix.storage.cookie.put("acces_type","Plq");
+	webix.storage.cookie.put("type_utl","utl");
 	open("vue_aqr.html", id_aqr = "1");
 };
 function modifier(){

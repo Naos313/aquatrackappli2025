@@ -6,7 +6,10 @@ html, body {
 	min-height: 10%;
 }
 .utl_liste{
-	min-height: 90%;
+	min-height: 50%;
+}
+.aqr_liste{
+	min-height: 40%;
 }
 .webix_hcell{
 	text-align: center; /* affiche les titre des liste au centre  */

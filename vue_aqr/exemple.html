@@ -34,19 +34,16 @@
 			}*/
 			webix.ui({
 				rows:[
-					{view:"uploader", name:"uploader", 
-						formData:function(){
-							return {
-								nom:"test aqr",
-								volume:"100",
-								acces:"Privé",
-								date:"2025-03-10 14:37:42"
-							};
-						},
+					{
+						view:"uploader", 
+						name:"uploader", 
+						upload:"/img",
+						value:"Charger"
 					},
 					{ template:"View 2" }
 				]
 			});
+
 		</script> 
 		<style>
 			.bouton{

@@ -3,6 +3,7 @@ var autre_bouton = false;
 var largeur = 400;
 
 var acces_type = webix.storage.cookie.get("acces_type");
+var utl_type = webix.storage.cookie.get("type_utl");
 
 if(page == "liste"){
 	btn_retour = true;
@@ -25,7 +26,7 @@ webix.ui({
 			height:55, 
 			value:"Retour",
 			hidden:btn_retour,
-			click:ouvre_vue_liste_aqr,
+			click:retour,
 		},
 		{},
 		{
@@ -69,6 +70,9 @@ webix.ui({
 	]
 });
 
-function ouvre_vue_liste_aqr(){
+function retour(){
+	if(utl_type == admin){
+		open("aqr.html", id_aqr = "1");
+	}
 	open("aqr.html", id_aqr = "1");
 };
