@@ -71,8 +71,15 @@ webix.ui({
 });
 
 function retour(){
-	if(utl_type == admin){
+	if(utl_type == "admin"){
+		open("/vue_admin/vue_admin.html", id_aqr = "1");
+	}
+	else{
 		open("aqr.html", id_aqr = "1");
 	}
-	open("aqr.html", id_aqr = "1");
 };
+function recharge_bandeau(){
+	var acces_type = webix.storage.cookie.get("acces_type");
+	var utl_type = webix.storage.cookie.get("type_utl");
+};
+

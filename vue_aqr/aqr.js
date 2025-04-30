@@ -125,17 +125,18 @@ function affiche_add_window(){
 function ouvre_vue_mon_aqr(){
 	var list = $$("aqr_prv_list");
 	var data = list.getSelectedId();
-	webix.storage.cookie.put("id_aqr",data.id);
-	webix.storage.cookie.put("acces_type","Utl");
+	webix.storage.cookie.put("id_aqr",data.id,";path=/");
+	webix.storage.cookie.put("acces_type","Utl",";path=/");
+	webix.storage.cookie.put("type_utl","utl",";path=/");
 	open("vue_aqr.html", id_aqr = "1");
 };
 function ouvre_vue_aqr_public(id){
 	var list = $$("aqr_plq_list");
 	var data = list.getItem(id);
-	webix.storage.cookie.put("id_aqr",data.id);
-	webix.storage.cookie.put("user_id",data.user_id);
-	webix.storage.cookie.put("acces_type","Plq");
-	webix.storage.cookie.put("type_utl","utl");
+	webix.storage.cookie.put("id_aqr",data.id,";path=/");
+	webix.storage.cookie.put("user_id",data.user_id,";path=/");
+	webix.storage.cookie.put("acces_type","Plq",";path=/");
+	webix.storage.cookie.put("type_utl","utl",";path=/");
 	open("vue_aqr.html", id_aqr = "1");
 };
 function modifier(){

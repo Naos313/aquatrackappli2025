@@ -63,7 +63,7 @@ function add_new_hote(){
 		date_introduction: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_introduction),// Formatage de la date d'introduction
 		date_retrait: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_retrait), // Formatage de la date de retrait
 		denomination: form_data.denomination,// Récupération de la dénomination
-		media_id: form_data.media,// Récupération du Média
+		//media_id: form_data.media,// Récupération du Média
 		nombre: form_data.nombre,// Récupération du nombre
 		surnom: form_data.surnom,// Récupération du surnom
 		commentaire: "" // Récupération du commentaire

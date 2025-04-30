@@ -9,6 +9,7 @@
 
 		<script>
 			
+			
 			//lien = document.getElementById("photo_lien");
 
 			
@@ -32,13 +33,23 @@
 				imageCapture.takePhoto();
 				document.getElementById("test").innerHTML= "bonjour";
 			}*/
+			
+			/*webix.attachEvent("onBeforeAjax", function(mode, url, data, request, headers, formData){ 
+				if (formData){
+					//headers["Authorization"]= CookieService.get('token'); 
+					headers["Content-type"]= "multipart/form-data";
+				}
+			});*/
+
 			webix.ui({
 				rows:[
 					{
-						view:"uploader", 
+						view:"uploader",
+						id: "uploader_test", 
 						name:"uploader", 
-						upload:"/img",
+						upload:"http://192.168.61.31/aqr/5/med",
 						value:"Charger"
+						
 					},
 					{ template:"View 2" }
 				]

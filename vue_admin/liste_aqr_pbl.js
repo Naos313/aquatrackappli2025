@@ -46,10 +46,10 @@ webix.ui({
 function ouvre_vue_aqr_public(id){
 	var list = $$("aqr_pbl_list");
 	var data = list.getItem(id);
-	webix.storage.cookie.put("id_aqr",data.id);
-	webix.storage.cookie.put("user_id",data.user_id);
-	webix.storage.cookie.put("acces_type","Plq");
-	webix.storage.cookie.put("type_utl","admin");
+	webix.storage.cookie.put("id_aqr",data.id,";path=/");
+	webix.storage.cookie.put("user_id",data.user_id,";path=/");
+	webix.storage.cookie.put("acces_type","Plq",";path=/");
+	webix.storage.cookie.put("type_utl","admin",";path=/");
 	open("/vue_aqr/vue_aqr.html", id_aqr = "1");
 };
 function unselect_list(){
