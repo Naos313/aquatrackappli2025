@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="Bandeau" class="bandeau"></div>
+    <div id="Page" class="Page"></div>
+    <script type="text/javascript" charset="utf-8">
+		var page;
+        webix.ready(function(){
+const AdresseApi = "http://192.168.61.87:3000"
+const types = [
+    { label: "Température", type_id: 1 },
+    { label: "Acidité", type_id: 2 },
+    { label: "Conductivité", type_id: 3 }
+];
+
+const rows = [];
+
+types.forEach(item => {
+    rows.push({ view: "label", label: item.label + " :" });
+    rows.push({
+        height: 300,
+        view: "chart",
+        type: "line",
+        url: "http://192.168.61.31/aqr/3/ppc/filter?av=2025-04-02%2014:58:39&ap=2025-04-04%2014:18:30&type_id=" + item.type_id,
+        value: "#valeur#",
+        xAxis: { template: "#date#" },
+        yAxis: {},
+        item: { radius: 0 }
+    });
+});
+
+webix.ui({container:"Page",
+                cols:[
+                    {   
+                        view: "scrollview",
+                        //scroll: "y",
+                        body: { rows: rows },
+                        
+                        
+                    },
+                    {   
+                        view:"form",
+                        width: 200,
+                        height: 865,
+                        id: "dataForm",
+                        elements:[
+                            { view:"label", label:"Dernière valeur :" },
+                            { view:"label", id:"dateLabel", label:"Date :"},
+                            { view:"label", id:"tempLabel", label:"Température :"},
+                            { view:"label", id:"pHLabel", label:"Acidité :"},
+                            { view:"label", id:"conductLabel", label:"Conductivité :"},
+                            { view:"label", id:"durtotLabel", label:"Dureté Totale :"},
+                            { view:"label", id:"durcarLabel", label:"Dureté Carbonatée :"},
+                            { view:"label", id:"nitriteLabel", label:"Nitrites :"},
+                            { view:"label", id:"nitrateLabel", label:"Nitrates :"},
+                            { view:"label", id:"ferLabel", label:"Fer :"},
+                            {view:"button" ,autowidth:true , value: "modifier mesures", click:pageModifierMesure}
+                        ]
+                    }
+                    
+                ]
+            });
+
+const labels = [
+    "tempLabel",
+    "pHLabel",
+    "conductLabel",
+    "durtotLabel",
+    "durcarLabel",
+    "nitriteLabel",
+    "nitrateLabel",
+    "ferLabel"
+];
+
+labels.forEach((labelId, index) => {
+    const typeId = index + 1;
+    const url = `http://192.168.61.31/aqr/3/ppc/last?type_id=${typeId}`;
+    
+    webix.ajax().get(url).then(response => {
+        const data = response.json();
+        const valeur = data.valeur;
+        const unite = data.type_unite;
+        $$(`${labelId}`).setValue($$(`${labelId}`).config.label.split(":")[0] + " : " + valeur + " " + unite);
+    }).catch(err => {
+        console.error("Erreur pour le type_id", typeId, err);
+        $$(`${labelId}`).setValue($$(`${labelId}`).config.label.split(":")[0] + " : Erreur");
+    });
+});
+
+
+        });
+function pageModifierMesure(){
+open("./VueEditMesure.html")
+	};
+    </script>
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+
+		.bandeau{
+			min-height: 10%;
+		}
+		.Page{
+			min-height: 90%;
+		}
+</style>
+<script src="http://192.168.62.23/bandeau/bandeau_liste_aqr_et_aqr_plb.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
