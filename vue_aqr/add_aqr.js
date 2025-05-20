@@ -41,7 +41,7 @@ var window_ajouter = webix.ui({
 				{ margin:5, rows:[
 					{},//affiche le bouton en bas
 					{ 
-						view:"button", id:"btn_modif", autowidth:true, height:80, value:"sauvegarder", click:modifier // appel la fonction modifier
+						view:"button", id:"btn_modif", autowidth:true, height:80, value:"sauvegarder", click:nouvel_aqr // appel la fonction nouvel_aqr
 					},
 				]}
 				  

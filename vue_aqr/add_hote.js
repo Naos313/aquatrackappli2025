@@ -59,14 +59,14 @@ function add_new_hote(){
 		return;
 	}
 	let newHote = { 
+		denomination: form_data.denomination,// Récupération de la dénomination
 		genre: form_data.genre, // Récupération du genre
+		surnom: form_data.surnom,// Récupération du surnom
+		nombre: form_data.nombre,// Récupération du nombre
 		date_introduction: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_introduction),// Formatage de la date d'introduction
 		date_retrait: webix.Date.dateToStr("%Y-%m-%d")(form_data.date_retrait), // Formatage de la date de retrait
-		denomination: form_data.denomination,// Récupération de la dénomination
 		//media_id: form_data.media,// Récupération du Média
-		nombre: form_data.nombre,// Récupération du nombre
-		surnom: form_data.surnom,// Récupération du surnom
-		commentaire: "" // Récupération du commentaire
+		//commentaire: "" // Récupération du commentaire
 	}; 
 		// Envoi des données via AJAX en méthode POST avec conversion en JSON 
 	webix.ajax().post(api_url_hte, JSON.stringify(newHote), { 

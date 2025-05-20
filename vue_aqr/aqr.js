@@ -8,7 +8,14 @@ webix.ui({
   //bouton Nouveau
 	{cols:[
 		{},
-		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouvel aquarium",click:affiche_add_window} //ouvre une nouvelle windows (add_aqr.js)
+		{
+			//ouvre une nouvelle windows (add_aqr.js)
+			view:"button", 
+			id:"btn_nouv", 
+			autowidth:true, 
+			value:"Nouvel aquarium",
+			click:affiche_add_window
+		}
 	]},
     { 
 		cols:[
@@ -31,7 +38,7 @@ webix.ui({
 			},
 			{
 				id: "acces", fillspace: true,
-				header:[ {text:""}, {text:"Accés"} ] //espace pour le nom de la table + nom de la colonne Accés
+				header:[ {text:""}, {text:"Accès"} ] //espace pour le nom de la table + nom de la colonne Accés
 			},
 			{
 				id: "volume",fillspace: true, 
@@ -139,7 +146,7 @@ function ouvre_vue_aqr_public(id){
 	webix.storage.cookie.put("type_utl","utl",";path=/");
 	open("vue_aqr.html", id_aqr = "1");
 };
-function modifier(){
+function nouvel_aqr(){
 	var data= $$("aqr_prv_list"); //selectionne la liste  mes aquariums dans data
 	
 	var form = $$("aqr_form"); //selectionne le formulaire de la windows dans form
@@ -153,7 +160,7 @@ function modifier(){
 		date: webix.Date.dateToStr("%Y-%m-%d")(form_data.date), // Formatage de la date 
 		acces: form_data.acces,// Récupération de l'accés 
 		volume: form_data.volume,// Récupération du volume
-		//photo: form_data.photo,// Récupération de la photo
+		photo: null,// Récupération de la photo
 		user_id: "1" // met l'user_id à 1 (à modifier)
 	}; 
 		// Envoi des données via AJAX en méthode POST avec conversion en JSON 

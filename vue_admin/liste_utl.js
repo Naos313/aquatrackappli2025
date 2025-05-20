@@ -8,7 +8,7 @@ webix.ui({
 		{
 			cols:[
 				{},
-				{ view:"button", id:"btn_nouv", autowidth:true, value:"Supprimer l'utilisateur", click:supprimer_utl}
+				{ view:"button", id:"btn_suppr", autowidth:true, value:"Supprimer l'utilisateur", click:supprimer_utl}
 			]
 		},
 		{
