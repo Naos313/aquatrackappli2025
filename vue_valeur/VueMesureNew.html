@@ -19,6 +19,7 @@ const types = [
 ];
 
 const rows = [];
+var id_aqr = webix.storage.cookie.get("id_aqr");
 
 types.forEach(item => {
     rows.push({ view: "label", label: item.label + " :" });
@@ -26,7 +27,7 @@ types.forEach(item => {
         height: 300,
         view: "chart",
         type: "line",
-        url: "http://192.168.61.31/aqr/3/ppc/filter?av=2025-04-02%2014:58:39&ap=2025-04-04%2014:18:30&type_id=" + item.type_id,
+        url: "http://192.168.61.31/aqr/" + id_aqr + "/ppc/filter?av=2025-04-02%2014:58:39&ap=2025-04-04%2014:18:30&type_id=" + item.type_id,
         value: "#valeur#",
         xAxis: { template: "#date#" },
         yAxis: {},
