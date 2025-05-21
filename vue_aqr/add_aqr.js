@@ -49,4 +49,32 @@ var window_ajouter = webix.ui({
 				
 			}
 		]}
-				});
+});
+function nouvel_aqr(){
+	var data= $$("aqr_prv_list"); //selectionne la liste  mes aquariums dans data
+	
+	var form = $$("aqr_form"); //selectionne le formulaire de la windows dans form
+	var form_data = form.getValues(); // met les données du formulaire dans form_data
+	if (!form_data.nom || !form_data.acces || !form_data.date || !form_data.volume){
+		webix.message("Le formulaire n'est pas rempli");// affiche un message d'erreur si les champs ne son pas remplient
+		return;
+	}
+	let newAquarium = { 
+		nom: form_data.nom, // Récupération du nom 
+		date: webix.Date.dateToStr("%Y-%m-%d")(form_data.date), // Formatage de la date 
+		acces: form_data.acces,// Récupération de l'accés 
+		volume: form_data.volume,// Récupération du volume
+		photo: null,// Récupération de la photo
+		user_id: "1" // met l'user_id à 1 (à modifier)
+	}; 
+		// Envoi des données via AJAX en méthode POST avec conversion en JSON 
+	webix.ajax().post(API_URL, JSON.stringify(newAquarium), { 
+		headers: { "Content-Type": "application/json" } // Envoi en JSON 
+	});
+	
+	//webix.message(item.nom + " a été ajouté");
+	//data.add(form_data); //rajoute un aquarium avec les données du formulaire
+	webix.message("L'aquarium " + form_data.nom + " a été ajouté");  // affiche un message de comfirmation
+	$$("aqr_prv_list").load(API_URL);  // rechache la liste
+	window_ajouter.hide(); //masque la window
+};				
