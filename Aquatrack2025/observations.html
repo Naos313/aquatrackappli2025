@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observations</title>
+    <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script type="text/javascript">
+        webix.ready(function() {
+            showObservations();
+        });
+
+        function showObservations() {
+            webix.ui({
+                container: "app",
+                rows: [
+                    { 
+                        view: "toolbar",
+                        elements: [
+                            { view: "label", label: "Liste des Observations" },
+                            { view: "button", value: "Retour", click: function() { window.location.href = "index.html"; } }
+                        ]
+                    },
+                    {
+                        view: "list",
+                        id: "observations_list",
+                        template: "#texte# - #date# <br><img src='#media#' width='100'/> <button class='delete-btn'>🗑</button>",
+                        type: { height: 100 },
+                        url: "http://192.168.61.90/api/observations",
+                        onClick: {
+                            "delete-btn": function(ev, id) {
+                                webix.confirm("Supprimer cette observation ?").then(function() {
+                                    webix.ajax().del("http://192.168.61.90/api/observations/" + id).then(function() {
+                                        $$("observations_list").remove(id);
+                                        webix.message("Observation supprimée !");
+                                    });
+                                });
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        view: "form",
+                        id: "add_observation_form",
+                        elements: [
+                            { view: "text", label: "Texte", name: "texte", required: true },
+                            { view: "datepicker", label: "Date", name: "date", required: true },
+                            { view: "uploader", label: "Ajouter un média", name: "media", accept: "image/*,video/*", autosend: false },
+                            {
+                                view: "button",
+                                value: "Ajouter",
+                                click: function() {
+                                    var form = $$("add_observation_form");
+                                    if (form.validate()) {
+                                        var data = form.getValues();
+                                        webix.ajax().post("http://192.168.61.90/api/observations", data).then(function() {
+                                            webix.message("Observation ajoutée !");
+                                            $$("observations_list").load("http://192.168.61.90/api/observations");
+                                            form.clear();
+                                        });
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            });
+        }
+    </script>
+
+</body>
+</html>

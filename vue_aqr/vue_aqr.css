@@ -1,0 +1,40 @@
+.webix_hcell{
+	text-align: center; /* affiche les titre des liste au centre  */
+}
+.webix_cell{
+	text-align: center; /* affiche les contenues des liste au centre */
+	font-size: 15px;
+}
+.webix_dtable .webix_ss_body .webix_column > div { /*met des bordures aux listes */
+	border-right-color: #EDEFF0;
+	border-left-color: #EDEFF0;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.bandeau{
+	min-height: 10%;
+}
+.aqr_info{
+	min-height: 20%;
+}
+.ppc_info{
+	min-height: 20%;
+}
+.hote{
+	min-height: 50%;
+}
+.titre_aqr{
+	text-align: center;
+	font-size: 150%;
+	font-weight: 900;
+}
+.gauche{
+	text-align: end;
+	height:100%;
+}
+.webix_view{
+	border-color: white;
+}
+
