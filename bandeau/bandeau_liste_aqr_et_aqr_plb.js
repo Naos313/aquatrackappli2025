@@ -45,6 +45,7 @@ webix.ui({
 			height:55, 
 			value:"Paramètre physico-chimique",
 			hidden:autre_bouton,
+			click:ouvre_vue_valeur,
 		},
 		{
 		},
@@ -77,6 +78,9 @@ function retour(){
 	else{
 		open("aqr.html", id_aqr = "1");
 	}
+};
+function ouvre_vue_valeur(){
+	open("/vue_observation/VueMesureNew.html", id_aqr = "1");
 };
 function recharge_bandeau(){
 	var acces_type = webix.storage.cookie.get("acces_type");
