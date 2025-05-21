@@ -80,7 +80,7 @@ function retour(){
 	}
 };
 function ouvre_vue_valeur(){
-	open("/vue_observation/VueMesureNew.html", id_aqr = "1");
+	open("/vue_valeur/VueMesureNew.html", id_aqr = "1");
 };
 function recharge_bandeau(){
 	var acces_type = webix.storage.cookie.get("acces_type");
