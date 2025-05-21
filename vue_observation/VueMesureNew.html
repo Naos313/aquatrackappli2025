@@ -45,12 +45,12 @@ webix.ui({container:"Page",
                     },
                     {   
                         view:"form",
-                        width: 200,
+                        width: 300,
                         height: 865,
                         id: "dataForm",
                         elements:[
                             { view:"label", label:"Dernière valeur :" },
-                            { view:"label", id:"dateLabel", label:"Date :"},
+                            { view:"label", id:"dateLabel", label:"Date : 20/05/2025"},
                             { view:"label", id:"tempLabel", label:"Température :"},
                             { view:"label", id:"pHLabel", label:"Acidité :"},
                             { view:"label", id:"conductLabel", label:"Conductivité :"},
@@ -88,7 +88,7 @@ labels.forEach((labelId, index) => {
         $$(`${labelId}`).setValue($$(`${labelId}`).config.label.split(":")[0] + " : " + valeur + " " + unite);
     }).catch(err => {
         console.error("Erreur pour le type_id", typeId, err);
-        $$(`${labelId}`).setValue($$(`${labelId}`).config.label.split(":")[0] + " : Erreur");
+        $$(`${labelId}`).setValue($$(`${labelId}`).config.label.split(":")[0] + " : Valeur non trouver");
     });
 });
 
