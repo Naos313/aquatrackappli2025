@@ -1,6 +1,7 @@
 var btn_retour = false;
 var autre_bouton = false;
 var largeur = 400;
+btn_retour_nom = "Retour"
 
 var acces_type = webix.storage.cookie.get("acces_type");
 var utl_type = webix.storage.cookie.get("type_utl");
@@ -12,6 +13,9 @@ if(page == "liste"){
 if(acces_type == "Plq"){
 	autre_bouton = true
 };
+if(page == "edit_mesure"){
+	btn_retour_nom = "Aquarium";
+}
 
 webix.ui({
 	container:"Bandeau",
@@ -24,7 +28,7 @@ webix.ui({
 			id:"btn_liste_aqr", 
 			width:largeur,
 			height:55, 
-			value:"Retour",
+			value:btn_retour_nom,
 			hidden:btn_retour,
 			click:retour,
 		},
