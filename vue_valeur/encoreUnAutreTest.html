@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="Bandeau" class="bandeau"></div>
+    <div id="Page" class="Page"></div>
+    <script type="text/javascript" charset="utf-8">
+		const aquariumId = 5;
+webix.ajax().headers({
+  "Content-Type": "text/plain"
+}).post("http://192.168.61.31/aqr/"+ aquariumId +"/ppc", JSON.stringify({
+
+  type_id: 2,
+  valeur: 7.111
+  
+})).then(function(response) {
+  webix.message("Données envoyées avec succès !");
+  console.log(response.json());
+}).catch(function(error) {
+  webix.message({ type: "error", text: "Erreur lors de l'envoi" });
+  console.error(error);
+});
+    </script>
+</body>
+</html>
+
