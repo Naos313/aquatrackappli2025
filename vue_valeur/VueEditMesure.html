@@ -6,12 +6,16 @@
         <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
+	<div id="Bandeau" class="bandeau"></div>
+    <div id="Page" class="Page"></div>
         <script type="text/javascript" charset="utf-8">
+			var page;
+			webix.ready(function(){
 			const serveur1 = "http://192.168.61.87:3000"
 			const serveur2 = "http://192.168.61.31/aqr/3"
 			const serveur = serveur2;
 			const aquariumId = 5;
-            webix.ui({
+            webix.ui({container:"Page",
                 rows: [
                     { view: "label", label: "Paramètres de l'Aquarium 3", align: "center" },
                     { 
@@ -86,6 +90,7 @@
 
                 ]
             });
+            });
 function clearForm(){
   $$("val_form").clear();
   $$("aquariumTable").unselectAll();
@@ -124,5 +129,19 @@ function sendTypeValeur(type, valeur) {
     });
 }
         </script>
+<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+
+		.bandeau{
+			min-height: 10%;
+		}
+		.Page{
+			min-height: 90%;
+		}
+</style>
+        <script src="http://192.168.62.23/bandeau/bandeau_liste_aqr_et_aqr_plb.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>
