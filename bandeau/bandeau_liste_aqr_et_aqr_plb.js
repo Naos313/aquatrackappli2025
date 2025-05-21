@@ -76,7 +76,12 @@ function retour(){
 		open("/vue_admin/vue_admin.html", id_aqr = "1");
 	}
 	else{
-		open("aqr.html", id_aqr = "1");
+		if(page == "aqr"){
+			open("/vue_aqr/aqr.html", id_aqr = "1");
+		} 
+		else{
+			open("/vue_aqr/vue_aqr.html", id_aqr = "1");
+		}
 	}
 };
 function ouvre_vue_valeur(){
