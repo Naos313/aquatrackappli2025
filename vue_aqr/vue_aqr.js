@@ -26,7 +26,9 @@ webix.ui({
 		{ 
 			view:"template", 
 			url:API_URL,
-			template:"Créé le #date#"
+			template:function (obj) {
+				return "Créé le " + format_date(obj.date);
+			}
 		},
 		{ 
 			view:"template",
