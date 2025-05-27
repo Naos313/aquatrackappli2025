@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html> 
+    <head> 
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="/img/favicon.ico">
+        <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
+        <script src="/webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
+        <title>Vue Tests</title>
+    </head> 
+    <body > 
+		<script src="/bandeau/comun.js" type="text/javascript" charset="utf-8"></script> 
+        <script>
+			webix.ui({
+				rows : [
+					{view:"button", id:"btn_ex_cookie", width:300, value:"Cookie", click: ouvre_exemple_cookie},
+					{view:"button", id:"btn_ex_ppc", width:300, value:"Ajouter/Modifier/Supprimer", click: ouvre_exemple_ppc},
+					{view:"button", id:"btn_ex_aqr", width:300, value:"Double requêtes", click: ouvre_exemple_aqr},
+					{},
+				],
+			});	
+			
+			function ouvre_exemple_cookie(){
+				open("exemple_cookie_1.html", id_aqr = "1");
+			}
+			function ouvre_exemple_ppc(){
+				open("exemple_cookie_1.html", id_aqr = "1");
+			}
+			function ouvre_exemple_aqr(){
+				open("exemple_cookie_1.html", id_aqr = "1");
+			}
+        </script> 
+</html> 
+
+
