@@ -14,20 +14,20 @@
 			webix.ui({
 				rows : [
 					{view:"button", id:"btn_ex_cookie", width:300, value:"Cookie", click: ouvre_exemple_cookie},
-					{view:"button", id:"btn_ex_ppc", width:300, value:"Ajouter/Modifier/Supprimer", click: ouvre_exemple_ppc},
-					{view:"button", id:"btn_ex_aqr", width:300, value:"Double requêtes", click: ouvre_exemple_aqr},
+					{view:"button", id:"btn_ex_ppc", width:300, value:"Ajouter/Modifier/Supprimer", click: ouvre_exemple_aqr},
+					{view:"button", id:"btn_ex_aqr", width:300, value:"Double requêtes", click: ouvre_exemple_ppc},
 					{},
 				],
 			});	
 			
 			function ouvre_exemple_cookie(){
-				open("exemple_cookie_1.html", id_aqr = "1");
+				open("exemple_cookie_1.html", id_aqr = "2");
 			}
 			function ouvre_exemple_ppc(){
-				open("exemple_cookie_1.html", id_aqr = "1");
+				open("exemple_derniere_ppc.html", id_aqr = "2");
 			}
 			function ouvre_exemple_aqr(){
-				open("exemple_cookie_1.html", id_aqr = "1");
+				open("exemple_ajouter_modifier_supprimer.html", id_aqr = "2");
 			}
         </script> 
 </html> 

@@ -1,14 +1,32 @@
 <!DOCTYPE html> 
 
 <html> 
-    <head> 
+    <head>         
+		<link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
         <link rel="icon" type="image/png" href="/img/favicon.ico">
+        <script src="../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
     </head> 
     <body> 
-        <p><a href="vue_aqr/aqr.html">Page aquarium</a></p>
-		<p><a href="vue_admin/vue_admin.html">Page admin</a></p>
-		<!--<p><a href="vue_aqr/Dossier%20-%20Aquatrack%20Appli.pdf">Dossier technique</a></p>
-		<p><a href="vue_aqr/exemple.html">Page test</a></p>-->  
-		<p><a href="/exemple_julien">Exemples</a></p>
+        <script>
+			webix.ui({
+				rows : [
+					{view:"button", id:"btn_utl", width:300, value:"Vue utilisateur", click: ouvre_vue_aqr},
+					{view:"button", id:"btn_adm", width:300, value:"Page administeur", click: ouvre_vue_admin},
+					{height:30},
+					{view:"button", id:"btn_ex_jd", width:300, value:"Exemples de Julien DAUX", click: ouvre_exemple_jd},
+					{},
+				],
+			});	
+			
+			function ouvre_vue_aqr(){
+				open("vue_aqr/aqr.html", id_aqr = "1");
+			}
+			function ouvre_vue_admin(){
+				open("vue_admin/vue_admin.html", id_aqr = "1");
+			}
+			function ouvre_exemple_jd(){
+				open("exemple_julien/", id_aqr = "1");
+			}
+        </script> 
     </body> 
 </html> 
