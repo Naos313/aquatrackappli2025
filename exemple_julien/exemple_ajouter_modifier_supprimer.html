@@ -11,6 +11,7 @@
     <body > 
 		<script src="/bandeau/comun.js" type="text/javascript" charset="utf-8"></script> 
         <script>
+			var format_date = webix.Date.dateToStr("%d/%m/%Y");// formmat de la date
 			webix.ui({
 				rows: [
 				{cols:[
@@ -20,8 +21,39 @@
 				]},
 				{
 					view:"datatable",
-					autoConfig:true,
+					id: "table_aqr",
 					url:"http://192.168.61.87:3000/aqr",
+					columns:[
+						{
+							id:"id",
+							fillspace:true,
+							header:[ {text:"Aquarium", colspan:5}, "Id"],
+						},
+						{
+							id:"nom",
+							fillspace:true,
+							header:[ "", "Nom"],
+						},
+						{
+							id:"acces",
+							fillspace:true,
+							header:[ "", "Accès"],
+						},
+						{
+							id:"date",
+							fillspace:true,
+							header:[ "", "Date de création"],
+							format:format_date,
+						},
+						{
+							id:"volume",
+							fillspace:true,
+							header:[ "", "Volume"],
+							template: function (obj) {
+								return "<span>" + obj.volume + " L</span>" //renvoi les données sous la forme "volume L"
+							}
+						},
+					]
 				},
 				],
 			});	
@@ -40,6 +72,9 @@
 				webix.ajax().post("http://192.168.61.87:3000/aqr", JSON.stringify(newAquarium), { 
 					headers: { "Content-Type": "application/json" } // Envoi en JSON 
 				});
+				$$("table_aqr").add(newAquarium);
+				webix.message("L'aqurium a été ajouté");
+				
 			}
 			function modifier(){
 				let newAquarium = { 
@@ -54,9 +89,26 @@
 				webix.ajax().put("http://192.168.61.87:3000/aqr/5", JSON.stringify(newAquarium), { 
 					headers: { "Content-Type": "application/json" } // Envoi en JSON 
 				});
+				$$("table_aqr").updateItem(5,newAquarium);
+				webix.message("L'aqurium a été modifié");
 			}
 			function suprimer(){
 				webix.ajax().del("http://192.168.61.87:3000/aqr/5");
+				$$("table_aqr").remove(5);
+				webix.message("L'aqurium a été supprimé");
 			}
         </script> 
+        <style>
+			.webix_hcell{
+				text-align: center; /* affiche les titre des liste au centre  */
+			}
+			.webix_cell{
+				text-align: center; /* affiche les contenues des liste au centre */
+				font-size: 15px;
+			}
+			.webix_dtable .webix_ss_body .webix_column > div { /*met des bordures aux listes */
+				border-right-color: #EDEFF0;
+				border-left-color: #EDEFF0;
+			}
+        </style>
 </html> 
