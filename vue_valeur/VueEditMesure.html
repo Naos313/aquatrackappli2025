@@ -11,13 +11,15 @@
         <script type="text/javascript" charset="utf-8">
 			var page = "edit_mesure";
 			webix.ready(function(){
+			var id_aqr = webix.storage.cookie.get("id_aqr");
 			const serveur1 = "http://192.168.61.87:3000"
-			const serveur2 = "http://192.168.61.31/aqr/3"
+			const serveur2 = "http://192.168.61.31/aqr/"+ id_aqr
 			const serveur = serveur2;
 			const aquariumId = 5;
+			
             webix.ui({container:"Page",
                 rows: [
-                    { view: "label", label: "Paramètres de l'Aquarium 3", align: "center" },
+                    { view: "template", url:serveur2, template: "Paramètres de #nom#" , align: "center" },
                     { 
                         view: "datatable", 
                         id: "aquariumTable",
