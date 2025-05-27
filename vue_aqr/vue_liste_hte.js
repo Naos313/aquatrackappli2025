@@ -3,6 +3,16 @@ var id_aqr = webix.storage.cookie.get("id_aqr");
 var api_url_hte = api_url + "aqr/" + id_aqr + "/hte"; //url api
 //var api_url_hte = "http://192.168.61.87:3000/hte"; //url api test
 var acces_type = webix.storage.cookie.get("acces_type");
+var slct = true;
+
+if (acces_type == "Plq")
+{
+	slct = false;
+}
+else
+{
+	slct = true;
+}
 
 webix.ui({ 
 	container:"liste_hote",
@@ -10,13 +20,13 @@ webix.ui({
   //bouton Nouveau
 	{cols:[
 		{height:1,},
-		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouveau hôte",hidden:true,click:affiche_add_window} //ouvre une nouvelle windows (add_hote.js)
+		{view:"button", id:"btn_nouv", autowidth:true, value:"Nouvel hôte",hidden:true,click:affiche_add_window} //ouvre une nouvelle windows (add_hote.js)
 	]},
 	{
 		// liste les hôtes
 		view:"datatable",
 		id:"hotes_list",
-		select:true,
+		select:slct,
 		columns:[
 			{
 				id:"genre",
@@ -43,7 +53,16 @@ webix.ui({
 				id:"date_retrait",
 				fillspace:true,
 				header:[ "", "Retrait"],
-				format:format_date  //affiche au format jj/mm/aaaa	
+				format:format_date,  //affiche au format jj/mm/aaaa	
+				template: function (obj) {
+					if (obj.date_retrait == "0000-00-00"){
+						if (obj.nombre == 1){
+							return "Non retiré";
+						}
+						return "Non retirés";
+					}
+					return format_date(obj.date_retrait);
+				}
 			},
 			{
 				id:"nombre",
@@ -84,10 +103,12 @@ function charge(){
 	if (acces_type == "Plq")
 	{
 		$$("btn_nouv").hide();
+		slct = false;
 	}
 	else
 	{
 		$$("btn_nouv").show();
+		slct = true;
 	}
 }
 function maj_hte(){

@@ -27,7 +27,7 @@ var window_ajouter = webix.ui({
 					},
 					{ view:"datepicker",format:"%d/%m/%Y", name:"date", id:"inp_date", value: new Date(), label:"Date de création :", labelWidth:160 }, //value affiche a la date du jour 
 					{ view:"text", name:"volume", id:"inp_volume", label:"Volume :", labelWidth:160 },
-					{ view:"text", name:"photo", id:"inp_photo", label:"Photo :", labelWidth:160 }, 
+					{ view:"text", name:"photo", id:"inp_photo", hidden:true, label:"Photo :", labelWidth:160 }, 
 					{} 
 				] 
 			},

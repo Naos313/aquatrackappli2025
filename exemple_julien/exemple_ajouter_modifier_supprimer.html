@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html> 
+    <head> 
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="/img/favicon.ico">
+        <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
+        <script src="/webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
+        <title>Vue éditer</title>
+    </head> 
+    <body > 
+		<script src="/bandeau/comun.js" type="text/javascript" charset="utf-8"></script> 
+        <script>
+			webix.ui({
+				rows: [
+				{cols:[
+					{view:"button", id:"btn_nouv", autowidth:true, value:"Ajouter", click: ajouter},
+					{view:"button", id:"btn_modif", autowidth:true, value:"Modifier", click: modifier},
+					{view:"button", id:"btn_supr", autowidth:true, value:"Suprimer", click: suprimer},
+				]},
+				{
+					view:"datatable",
+					autoConfig:true,
+					url:"http://192.168.61.87:3000/aqr",
+				},
+				],
+			});	
+			
+			function ajouter(){
+				let newAquarium = { 
+					id: "5",
+					nom: "test", // Récupération du nom 
+					date: "26/05/2025", // Formatage de la date 
+					acces: "Publics",// Récupération de l'accés 
+					volume: 90,// Récupération du volume
+					photo: null,// Récupération de la photo
+					user_id: "1" // met l'user_id à 1 (à modifier)
+				}; 
+					// Envoi des données via AJAX en méthode POST avec conversion en JSON 
+				webix.ajax().post("http://192.168.61.87:3000/aqr", JSON.stringify(newAquarium), { 
+					headers: { "Content-Type": "application/json" } // Envoi en JSON 
+				});
+			}
+			function modifier(){
+				let newAquarium = { 
+					nom: "trie", // Récupération du nom 
+					date: "29/05/2025", // Formatage de la date 
+					acces: "Privé",// Récupération de l'accés 
+					volume: 59,// Récupération du volume
+					photo: null,// Récupération de la photo
+					user_id: "1" // met l'user_id à 1 (à modifier)
+				}; 
+					// Envoi des données via AJAX en méthode POST avec conversion en JSON 
+				webix.ajax().put("http://192.168.61.87:3000/aqr/5", JSON.stringify(newAquarium), { 
+					headers: { "Content-Type": "application/json" } // Envoi en JSON 
+				});
+			}
+			function suprimer(){
+				webix.ajax().del("http://192.168.61.87:3000/aqr/5");
+			}
+        </script> 
+</html> 
