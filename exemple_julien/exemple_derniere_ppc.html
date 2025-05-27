@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html> 
+    <head> 
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="/img/favicon.ico">
+        <link rel="stylesheet" href="/webix/codebase/webix.css" type="text/css" charset="utf-8"> 
+        <script src="/webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
+        <title>Vue derniers ppc</title>
+    </head> 
+    <body onload="donnees_ppc();"> 
+		<script src="/bandeau/comun.js" type="text/javascript" charset="utf-8"></script> 
+        <script>
+			var api_url_typ = api_url + "typ";
+			var api_url_ppc = api_url + "aqr/" + 3 + "/ppc/last?type_id=";
+			webix.ui({
+				view:"list",
+				id:"ppc_list",
+				template:"#type_nom#: #valeur# #type_unite# du #date#",
+				
+				
+			});
+
+			function donnees_ppc(){
+				webix.ajax().get(api_url_typ).then(function(data_typ_json){
+					data_typ = data_typ_json.json();
+					let test;
+					
+					for ( let ligne_typ of data_typ){
+						test = webix.ajax().get(api_url_ppc + ligne_typ.id).then(function(data_ppc_json){
+							data_ppc = data_ppc_json.json();
+							
+							$$("ppc_list").add(data_ppc);
+						});
+					}
+					
+				});
+			}
+        </script> 
+</html> 
+

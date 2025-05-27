@@ -33,7 +33,7 @@ var window_ajouter_hote = webix.ui({
 					{ view:"datepicker",format:"%d/%m/%Y", name:"date_introduction", id:"inp_date_intro", value: new Date(), label:"Date d'introduction :", labelWidth:160 }, //value affiche a la date du jour 
 					{ view:"datepicker",format:"%d/%m/%Y", name:"date_retrait", id:"inp_date_retrait", label:"Date de retait :", labelWidth:160 },
 					{ view:"text", name:"nombre", id:"inp_nombre", label:"Nombre :", value: "1", labelWidth:160 },
-					{ view:"text", name:"media", id:"inp_media", label:"Média :", labelWidth:160 }, 
+					{ view:"text", name:"media", id:"inp_media", label:"Média :", labelWidth:160, hidden:true }, 
 					{} 
 				]
 			},

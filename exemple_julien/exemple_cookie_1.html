@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html> 
+    <head> 
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="/img/favicon.ico">
+        <link rel="stylesheet" href="../webix/codebase/webix.css" type="text/css" charset="utf-8"> 
+        <script src="/webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script> 
+        <title>Vue cookie</title>
+    </head> 
+    <body > 
+		<script src="/bandeau/comun.js" type="text/javascript" charset="utf-8"></script> 
+        <script>
+			webix.ui({
+				cols:[
+					{
+						view:"combo", 
+						label: "Chifre",
+						id: "combo_chifre",
+						value:"0", 
+						options:[
+							{id:"0", value:"Zéro"},
+							{id:"1", value:"Un"},
+							{id:"2", value:"Deux"},
+							{id:"3", value:"Trois"},
+							{id:"4", value:"Quatre"},
+							{id:"5", value:"Cinq"},
+							{id:"6", value:"Six"},
+							{id:"7", value:"Sept"},
+							{id:"8", value:"Huit"},
+							{id:"9", value:"Neuf"},
+						]
+					},
+					{rows : [
+						{view:"button", id:"btn_nouv", autowidth:true, value:"Seconde vue", click: ouvre_exemple_cookie_2},
+						{},
+					]},
+				],
+			});	
+			
+			function ouvre_exemple_cookie_2(){
+				var data = $$("combo_chifre").getValue();
+				webix.storage.cookie.put("chifre",data,";path=/");
+				open("exemple_cookie_2.html", id_aqr = "1");
+			}
+        </script> 
+</html> 
+
