@@ -21,7 +21,7 @@
 				{
 					view:"datatable",
 					id: "table_aqr",
-					url:"http://192.168.61.87:3000/aqr",
+					url:"http://192.168.61.209:3000/aqr",
 					columns:[
 						{
 							id:"id",
@@ -72,7 +72,7 @@
 					webix.message("L'aqurium a déja été ajouté");
 					return;
 				}
-				webix.ajax().post("http://192.168.61.87:3000/aqr", JSON.stringify(newAquarium), { 
+				webix.ajax().post("http://192.168.61.209:3000/aqr", JSON.stringify(newAquarium), { 
 					headers: { "Content-Type": "application/json" } // Envoi en JSON 
 				});
 				$$("table_aqr").add(newAquarium);
@@ -89,7 +89,7 @@
 					user_id: "1" // met l'user_id à 1 (à modifier)
 				};
 				if  ($$("table_aqr").exists(5)){  
-					webix.ajax().put("http://192.168.61.87:3000/aqr/5", JSON.stringify(newAquarium), { 
+					webix.ajax().put("http://192.168.61.209:3000/aqr/5", JSON.stringify(newAquarium), { 
 						headers: { "Content-Type": "application/json" } // Envoi en JSON 
 					});
 					$$("table_aqr").updateItem(5,newAquarium);
@@ -101,7 +101,7 @@
 			}
 			function suprimer(){
 				if  ($$("table_aqr").exists(5)){
-					webix.ajax().del("http://192.168.61.87:3000/aqr/5");
+					webix.ajax().del("http://192.168.61.209:3000/aqr/5");
 					$$("table_aqr").remove(5);
 					webix.message("L'aqurium a été supprimé");
 				}
