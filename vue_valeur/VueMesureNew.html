@@ -22,13 +22,30 @@ const types = [
 const rows = [];
 var id_aqr = webix.storage.cookie.get("id_aqr");
 
+function datePourURL(date) {
+  let format = webix.Date.dateToStr("%Y-%m-%d %H:%i:%s");
+  let dateStr = format(date);
+  return dateStr.replace(" ", "%20"); // Ne touche pas aux ":"
+}
+// Exemple : date actuelle
+let maintenant = new Date();
+let dateURL = datePourURL(maintenant);
+console.log(dateURL);
+// Exemple : date -2 mois
+let deuxMoisAvant = new Date(maintenant);
+deuxMoisAvant.setMonth(maintenant.getMonth() - 2);
+let dateFrom = datePourURL(deuxMoisAvant);
+let dateTo = datePourURL(maintenant);
+console.log(dateFrom);
+
 types.forEach(item => {
     rows.push({ view: "label", label: item.label + " :" });
     rows.push({
         height: 300,
         view: "chart",
         type: "line",
-        url: "http://192.168.61.31/aqr/" + id_aqr + "/ppc/filter?av=2025-04-02%2014:58:39&ap=2025-04-04%2014:18:30&type_id=" + item.type_id,
+        //url: "http://192.168.61.31/aqr/" + id_aqr + "/ppc/filter?av=2025-04-02%2014:58:39&ap=2025-04-04%2014:18:30&type_id=" + item.type_id,
+        url: "http://192.168.61.31/aqr/" + id_aqr + "/ppc/filter?av=$"+ dateFrom +"&ap="+ dateTo +"&type_id=" + item.type_id,
         value: "#valeur#",
         xAxis: { template: "#date#" },
         yAxis: {},
@@ -81,7 +98,7 @@ const labels = [
 
 labels.forEach((labelId, index) => {
     const typeId = index + 1;
-    const url = `http://192.168.61.31/aqr/3/ppc/last?type_id=${typeId}`;
+    const url = `http://192.168.61.31/aqr/` + id_aqr + `/ppc/last?type_id=${typeId}`;
     
     webix.ajax().get(url).then(response => {
         const data = response.json();
@@ -97,7 +114,7 @@ labels.forEach((labelId, index) => {
 
         });
 function pageModifierMesure(){
-open("./VueEditMesure.html", id_aqr = "1")
+open("./VueEditMesure.html")
 	};
     </script>
 	<style>
