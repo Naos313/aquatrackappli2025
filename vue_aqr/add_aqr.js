@@ -21,7 +21,7 @@ var window_ajouter = webix.ui({
 						value:"privé", // valeur par défaut
 						options:[
 							{id:"privé", value:"privé"},
-							{id:"publique", value:"publique"}
+							{id:"publique", value:"public"}
 						],
 						labelWidth:160 // labelwidth est la largeur du libélé
 					},

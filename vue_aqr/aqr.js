@@ -38,7 +38,13 @@ webix.ui({
 			},
 			{
 				id: "acces", fillspace: true,
-				header:[ {text:""}, {text:"Accès"} ] //espace pour le nom de la table + nom de la colonne Accés
+				header:[ {text:""}, {text:"Accès"} ], //espace pour le nom de la table + nom de la colonne Accés
+				template: function (obj) {
+					if (obj.acces == "Publique"){
+						return "Public" // affiche l'image avec comme hauteur celle de la colonne
+					}
+					return obj.acces  // affiche l'image avec comme hauteur celle de la colonne
+				  }
 			},
 			{
 				id: "volume",fillspace: true, 
@@ -126,6 +132,8 @@ function affiche_add_window(){
 				window_ajouter.show();
 				var form = $$("aqr_form"); //selectionne le formulaire de la windows dans form
 				form.clear(); //vide le formulaire
+				$$("inp_acces").setValue("privé");
+				$$("inp_date").setValue(new Date());
 			};
 
 //rajoute un aquarium

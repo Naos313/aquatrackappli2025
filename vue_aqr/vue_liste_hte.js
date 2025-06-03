@@ -88,6 +88,8 @@ function affiche_add_window(){
 				window_ajouter_hote.show();
 				var form = $$("hote_form"); //selectionne le formulaire de la windows dans form
 				form.clear(); //vide le formulaire
+				$$("inp_date_intro").setValue(new Date());
+				$$("inp_nombre").setValue("1");
 			};
 
 /*function clearForm(){
