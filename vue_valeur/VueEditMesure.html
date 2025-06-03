@@ -14,7 +14,14 @@
 			webix.ready(function(){
 				var id_aqr = webix.storage.cookie.get("id_aqr");
 				var option_data = [
-					{id:1,value:"Books"},];
+					{id:1,value:"Temperature"},
+					{id:2,value:"pH"},
+					{id:3,value:"Conductivié"},
+					{id:4,value:"Dureté Totale"},
+					{id:5,value:"Dureté Carbonatée"},
+					{id:6,value:"Nitrites"},
+					{id:7,value:"Nitrates"},
+					{id:8,value:"Fer"},];
 				const serveur1 = "http://192.168.61.87:3000"
 				const serveur2 = "http://192.168.61.31/aqr/"+ id_aqr
 				const serveur = serveur2;
@@ -44,8 +51,8 @@
 								elements:[ 
 									//{ view:"datepicker",format: "%Y-%d-%m %H-%i", name:"date", id:"date", label:"Date de création :",timepicker: true ,labelWidth: 130},
 									{ view:"text", name:"valeur", id:"valeur", label:"valeur" ,labelWidth: 130},
-									{ view:"text", name:"type", id:"type", label:"type" ,labelWidth: 130},
-									//{ view:"combo", label:"type", options:option_data, value:3 },labelWidth: 130},    https://webix.com/tutorials/controlsguide/6
+									//{ view:"text", name:"type", id:"type", label:"type" ,labelWidth: 130},
+									{ view:"combo", label:"type", id:"type", options:option_data, value:1 ,labelWidth: 130},    //https://webix.com/tutorials/controlsguide/6
 								]
 							},
 							{view:"toolbar",id:"bouton",
@@ -79,7 +86,6 @@
 			});
 			function clearForm(){
 			  $$("val_form").clear();
-			  $$("aquariumTable").unselectAll();
 			};
 
 			function supprimer(){
@@ -114,6 +120,7 @@
 					webix.message({ type: "error", text: "Erreur lors de l'envoi" });
 					console.error(error);
 				});
+				clearForm();
 			}
         </script>
 		<style>
