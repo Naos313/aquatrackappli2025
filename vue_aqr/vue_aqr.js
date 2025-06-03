@@ -11,11 +11,16 @@ var page = "aqr";
 if (acces_type == "Plq")
 {
 	acces_ou_utl = "<div class='gauche'>Utilisateur : #identifiant#</div>";
-	api_changente = "http://192.168.61.87:3000/utl/" + user_id;
+	api_changente = "http://192.168.61.209:3000/utl/" + user_id;
 }
 else
 {
-	acces_ou_utl = "<div class='gauche'>Statut : #acces#</div>";
+	acces_ou_utl = function (obj) {
+					if (obj.acces == "Publique"){
+						return "<div class='gauche'>Statut : Public</div>" // affiche l'image avec comme hauteur celle de la colonne
+					}
+					return "<div class='gauche'>Statut : Privé</div>" // affiche l'image avec comme hauteur celle de la colonne
+				  };
 	api_changente = API_URL;
 }
 
